@@ -46,7 +46,7 @@ const Router = () => {
 
 					<Route path="/logout" element={<Logout />} />
 					<Route path="/" element={() => <Navigate to="/login" />} />
-					<Route element={<ErrorPage />} />
+					<Route path="*" element={<ErrorPage />} />
 				</Routes>
 			)}
 		</BrowserRouter>

@@ -69,7 +69,10 @@ const Login = () => {
 							required
 						/>
 						<S.ForgotPasswordWrapper>
-							<Link text={t('auth.forgotPassword')} href="#" />
+							<Link
+								text={t('auth.forgotPassword')}
+								href="/forgot-password"
+							/>
 						</S.ForgotPasswordWrapper>
 						<Button text={t('auth.signIn')} type="submit" />
 					</S.Form>
