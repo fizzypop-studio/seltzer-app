@@ -1,9 +1,9 @@
 import { User } from './User';
 
-export interface ReduxUser {
+export type ReduxUser = {
 	user: {
 		value: User | null;
 		status: string;
 		error: string;
 	};
-}
+};

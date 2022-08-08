@@ -1,10 +1,18 @@
 import * as S from './Button.styles';
 import { ButtonProps as MUIButtonProps } from '@mui/material/Button';
 
-export interface ButtonProps extends MUIButtonProps {
+export type ButtonProps = MUIButtonProps & {
 	text: string;
-}
+};
 
-export const Button = ({ text, ...props }: ButtonProps) => {
-	return <S.StyledButton {...props}>{text}</S.StyledButton>;
+export const Button = ({
+	text,
+	variant = 'contained',
+	...props
+}: ButtonProps) => {
+	return (
+		<S.StyledButton variant={variant} {...props}>
+			{text}
+		</S.StyledButton>
+	);
 };

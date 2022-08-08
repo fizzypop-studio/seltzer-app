@@ -21,10 +21,19 @@ export const HeaderWrapper = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	padding: 0 4rem;
+	text-align: center;
+	line-height: 1rem;
 
 	h4 {
 		margin-bottom: 1rem;
 	}
 `;
 
-export const Form = styled.form``;
+export const Form = styled.form`
+	margin: 2rem 0;
+`;
+
+export const ForgotPasswordWrapper = styled.div`
+	margin: 1rem 0 1.5rem;
+`;

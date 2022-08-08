@@ -24,7 +24,7 @@ module.exports = {
     'linebreak-style': 'off',
     'prettier/prettier': ['error', {
       endOfLine: 'auto'
-    }]
+    }],
   },
   settings: { 
     'import/resolver': {

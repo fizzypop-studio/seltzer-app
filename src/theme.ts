@@ -4,7 +4,7 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
 	palette: {
 		primary: {
-			main: '#E16F7C',
+			main: '#443850',
 			contrastText: '#fff', //button text white instead of black
 		},
 		background: {

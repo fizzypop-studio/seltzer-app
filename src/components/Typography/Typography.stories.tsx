@@ -7,4 +7,6 @@ export default {
 	component: Typography,
 } as ComponentMeta<typeof Typography>;
 
-export const H1: ComponentStory<typeof Typography> = () => <Typography variant="h1">H1</Typography>;
+export const H1: ComponentStory<typeof Typography> = () => (
+	<Typography variant="h1">H1</Typography>
+);

@@ -1,53 +1,77 @@
-import { Container } from 'components/Containers/Container';
-import { Box } from 'components/Containers/Box';
-import { Typography } from 'components/Typography';
+import {
+	Box,
+	Button,
+	Container,
+	Link,
+	TextInput,
+	Typography,
+} from 'components';
 
-import { useForm, Resolver } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
 import * as S from './Login.styles';
 
-interface LoginFormProps {
+type LoginFormValues = {
 	email: string;
 	password: string;
-}
-
-const resolver: Resolver<LoginFormProps> = async (values) => {
-	return {
-		values: values.password ? values : {},
-		errors: !values.password
-			? {
-					password: {
-						type: 'required',
-						message: 'Password is required',
-					},
-			  }
-			: {},
-	};
 };
 
+const schema = yup
+	.object({
+		email: yup.string().required(),
+		password: yup.string().required(),
+	})
+	.required();
+
 const Login = () => {
+	const { t } = useTranslation();
 	const {
-		register,
 		handleSubmit,
+		control,
 		formState: { errors },
-	} = useForm<LoginFormProps>({ resolver });
-	const onSubmit = (data: LoginFormProps) => console.log(data);
+	} = useForm<LoginFormValues>({ resolver: yupResolver(schema) });
+	const onSubmit = (data: LoginFormValues) => console.log(data);
 
 	return (
 		<S.Wrapper>
 			<Container className="container" maxWidth="sm">
 				<Box className="login-box">
 					<S.HeaderWrapper>
-						<Typography variant="h4">Login</Typography>
-						<Typography variant="subtitle1">Hey, Enter your details to sign in to your account</Typography>
+						<Typography variant="h4">{t('auth.login')}</Typography>
+						<Typography variant="h6">
+							{t('auth.loginSubtitle')}
+						</Typography>
 					</S.HeaderWrapper>
 					<S.Form onSubmit={handleSubmit(onSubmit)}>
-						<input defaultValue="test" {...register('email')} />
-
-						<input {...register('password', { required: true })} />
-						{errors.password && <span>Password is required</span>}
-
-						<input type="submit" />
+						<TextInput
+							name="email"
+							control={control}
+							label={t('auth.email.label')}
+							error={!!errors.email}
+							helperText={
+								!!errors.email ? t('auth.email.required') : ''
+							}
+							required
+						/>
+						<TextInput
+							name="password"
+							control={control}
+							label={t('auth.password.label')}
+							error={!!errors.password}
+							helperText={
+								!!errors.password
+									? t('auth.password.required')
+									: ''
+							}
+							required
+						/>
+						<S.ForgotPasswordWrapper>
+							<Link text={t('auth.forgotPassword')} href="#" />
+						</S.ForgotPasswordWrapper>
+						<Button text={t('auth.signIn')} type="submit" />
 					</S.Form>
 				</Box>
 			</Container>
