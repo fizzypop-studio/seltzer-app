@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import {
 	Box,
 	Button,
@@ -37,13 +38,18 @@ const schema = yup
 	.required();
 
 const SignUp = () => {
+	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const {
 		handleSubmit,
 		control,
 		formState: { errors },
 	} = useForm<SignUpFormValues>({ resolver: yupResolver(schema) });
-	const onSubmit = (data: SignUpFormValues) => console.log(data);
+
+	const onSubmit = (data: SignUpFormValues) => {
+		console.log({ data });
+		navigate('/dashboard');
+	};
 
 	return (
 		<S.Wrapper>
@@ -67,7 +73,7 @@ const SignUp = () => {
 				<Box className="sign-up-box">
 					<S.BoxHeaderWrapper>
 						<Typography variant="h4">{t('auth.signUp')}</Typography>
-						<Typography variant="h6">
+						<Typography variant="subtitle1">
 							{t('auth.signUpSubtitle')}
 						</Typography>
 					</S.BoxHeaderWrapper>

@@ -7,6 +7,7 @@ export const en = {
 				'Hello there, Enter your details to sign in to your account',
 			signUpSubtitle:
 				'Welcome, Enter your details to create a new account',
+			forgotPasswordSubtitle: 'Enter your email to reset your password',
 			signIn: 'Sign in',
 			signUp: 'Sign Up',
 			firstName: {
@@ -29,7 +30,9 @@ export const en = {
 				label: 'Confirm Password',
 				required: 'Confirm Password is required',
 			},
-			forgotPassword: 'Having trouble signing in?',
+			forgotPassword: 'Forgot Password',
+			resetPassword: 'Reset Password',
+			trouble: 'Having trouble signing in?',
 			signInWith: 'Or Sign in with',
 			signUpWith: 'Or Sign up with',
 			social: {
@@ -39,6 +42,7 @@ export const en = {
 			},
 			haveAccount: "Don't have an account?",
 			alreadyHaveAccount: 'Already have an account?',
+			havePassword: 'Have your password?',
 			requestDemo: 'Request Demo',
 			createAccount: 'Create Account',
 		},
