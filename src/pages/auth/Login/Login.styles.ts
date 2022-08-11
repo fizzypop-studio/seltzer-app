@@ -16,6 +16,7 @@ export const Wrapper = styled.div`
 		justify-content: center;
 		align-items: center;
 		width: inherit;
+		padding-bottom: 2rem;
 
 		.login-box {
 			background-color: #fff;
@@ -45,6 +46,10 @@ export const HeaderActionWrapper = styled.div`
 	justify-content: flex-end;
 	align-items: center;
 	width: 75%;
+
+	.sign-up-button {
+		color: #fff;
+	}
 
 	.request-button {
 		width: 12rem;
@@ -98,4 +103,9 @@ export const BoxFooterWrapper = styled.div`
 
 export const FooterWrapper = styled.div`
 	margin-top: 1rem;
+
+	p,
+	a {
+		color: #fff;
+	}
 `;

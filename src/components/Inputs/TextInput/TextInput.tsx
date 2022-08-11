@@ -3,7 +3,7 @@ import { Controller } from 'react-hook-form';
 import TextField, {
 	TextFieldProps as MUITextFieldProps,
 } from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
+import { IconButton } from 'components';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import * as S from './TextInput.styles';
 
@@ -66,9 +66,14 @@ export const TextInput = forwardRef(
 							onClick={handleClickShowPassword}
 							onMouseDown={handleMouseDownPassword}
 							edge="end"
-						>
-							{showPassword ? <VisibilityOff /> : <Visibility />}
-						</IconButton>
+							icon={
+								showPassword ? (
+									<VisibilityOff />
+								) : (
+									<Visibility />
+								)
+							}
+						/>
 					</S.PasswordIconWrapper>
 				)}
 			</S.Wrapper>

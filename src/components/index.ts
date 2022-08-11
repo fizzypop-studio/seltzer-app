@@ -8,6 +8,7 @@ export { Typography } from './Typography';
 Buttons
 *************/
 export { Button } from './Buttons/Button';
+export { IconButton } from './Buttons/IconButton';
 
 /*************
 Layout
