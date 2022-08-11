@@ -24,16 +24,20 @@ type LoginFormValues = {
 	password: string;
 };
 
-const schema = yup
-	.object({
-		email: yup.string().required(),
-		password: yup.string().required(),
-	})
-	.required();
-
 const Login = () => {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
+
+	const schema = yup
+		.object({
+			email: yup
+				.string()
+				.email(t('auth.email.valid'))
+				.required(t('auth.email.required')),
+			password: yup.string().required(),
+		})
+		.required();
+
 	const {
 		handleSubmit,
 		control,
@@ -78,7 +82,7 @@ const Login = () => {
 							label={t('auth.email.label')}
 							error={!!errors.email}
 							helperText={
-								!!errors.email ? t('auth.email.required') : ''
+								!!errors.email ? errors.email.message : ''
 							}
 							required
 						/>

@@ -27,19 +27,23 @@ type SignUpFormValues = {
 	confirmPassword: string;
 };
 
-const schema = yup
-	.object({
-		firstName: yup.string().required(),
-		lastName: yup.string().required(),
-		email: yup.string().required(),
-		password: yup.string().required(),
-		confirmPassword: yup.string().required(),
-	})
-	.required();
-
 const SignUp = () => {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
+
+	const schema = yup
+		.object({
+			firstName: yup.string().required(),
+			lastName: yup.string().required(),
+			email: yup
+				.string()
+				.email(t('auth.email.valid'))
+				.required(t('auth.email.required')),
+			password: yup.string().required(),
+			confirmPassword: yup.string().required(),
+		})
+		.required();
+
 	const {
 		handleSubmit,
 		control,
@@ -113,7 +117,7 @@ const SignUp = () => {
 							label={t('auth.email.label')}
 							error={!!errors.email}
 							helperText={
-								!!errors.email ? t('auth.email.required') : ''
+								!!errors.email ? errors.email.message : ''
 							}
 							required
 						/>

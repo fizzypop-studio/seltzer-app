@@ -20,6 +20,7 @@ export const en = {
 			},
 			email: {
 				label: 'Enter email',
+				valid: 'Please enter a valid email',
 				required: 'Email is required',
 			},
 			password: {

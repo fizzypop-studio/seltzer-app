@@ -19,15 +19,19 @@ type ForgotPasswordFormValues = {
 	email: string;
 };
 
-const schema = yup
-	.object({
-		email: yup.string().required(),
-	})
-	.required();
-
 const ForgotPassword = () => {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
+
+	const schema = yup
+		.object({
+			email: yup
+				.string()
+				.email(t('auth.email.valid'))
+				.required(t('auth.email.required')),
+		})
+		.required();
+
 	const {
 		handleSubmit,
 		control,
@@ -63,7 +67,7 @@ const ForgotPassword = () => {
 							label={t('auth.email.label')}
 							error={!!errors.email}
 							helperText={
-								!!errors.email ? t('auth.email.required') : ''
+								!!errors.email ? errors.email.message : ''
 							}
 							required
 						/>
