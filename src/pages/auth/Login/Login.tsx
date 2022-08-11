@@ -3,6 +3,8 @@ import {
 	Button,
 	Container,
 	Link,
+	Stack,
+	TextDivider,
 	TextInput,
 	Typography,
 } from 'components';
@@ -11,6 +13,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
+
+import { Google, Apple, Facebook } from '@mui/icons-material';
 
 import * as S from './Login.styles';
 
@@ -76,6 +80,32 @@ const Login = () => {
 						</S.ForgotPasswordWrapper>
 						<Button text={t('auth.signIn')} type="submit" />
 					</S.Form>
+					<TextDivider text={t('auth.signInWith')} />
+					<S.ButtonWrapper>
+						<Stack direction="row" spacing={2}>
+							<Button
+								text={t('auth.social.google')}
+								variant="outlined"
+								startIcon={<Google />}
+							/>
+							<Button
+								text={t('auth.social.apple')}
+								variant="outlined"
+								startIcon={<Apple />}
+							/>
+							<Button
+								text={t('auth.social.facebook')}
+								variant="outlined"
+								startIcon={<Facebook />}
+							/>
+						</Stack>
+					</S.ButtonWrapper>
+					<S.BoxFooterWrapper>
+						<Typography variant="body1">
+							{t('auth.haveAccount')}
+						</Typography>
+						<Link text={t('auth.signUp')} href="/sign-up" />
+					</S.BoxFooterWrapper>
 				</Box>
 			</Container>
 		</S.Wrapper>

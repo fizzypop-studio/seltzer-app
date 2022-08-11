@@ -3,6 +3,10 @@ import styled from '@emotion/styled';
 export const Wrapper = styled.div`
 	width: 100%;
 	height: 100%;
+	background-image: url('https://bit.ly/3JJHNlG');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
 
 	.container {
 		display: flex;
@@ -11,6 +15,7 @@ export const Wrapper = styled.div`
 		height: inherit;
 
 		.login-box {
+			background-color: #fff;
 			width: 100%;
 		}
 	}
@@ -36,4 +41,20 @@ export const Form = styled.form`
 
 export const ForgotPasswordWrapper = styled.div`
 	margin: 1rem 0 1.5rem;
+`;
+
+export const ButtonWrapper = styled.div`
+	margin: 1.5rem 0;
+`;
+
+export const BoxFooterWrapper = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-top: 1.5rem;
+
+	a {
+		margin-left: 0.25rem;
+	}
 `;

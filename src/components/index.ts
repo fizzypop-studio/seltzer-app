@@ -1,14 +1,21 @@
 /*************
+General
+*************/
+export { Link } from './Link';
+export { Typography } from './Typography';
+
+/*************
 Buttons
 *************/
 export { Button } from './Buttons/Button';
 
 /*************
-Containers
+Layout
 *************/
-export { Box } from './Containers/Box';
-export { Container } from './Containers/Container';
-export { Paper } from './Containers/Paper';
+export { Box } from './Layout/Box';
+export { Container } from './Layout/Container';
+export { Paper } from './Layout/Paper';
+export { Stack } from './Layout/Stack';
 
 /*************
 Inputs
@@ -16,7 +23,6 @@ Inputs
 export { TextInput } from './Inputs/TextInput';
 
 /*************
-General
+Dividers
 *************/
-export { Link } from './Link';
-export { Typography } from './Typography';
+export { TextDivider } from './Dividers/TextDivider';

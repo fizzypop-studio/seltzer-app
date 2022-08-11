@@ -1,10 +1,11 @@
 export const en = {
 	translation: {
 		auth: {
-			login: 'Client Login',
+			login: 'Login',
 			loginSubtitle:
 				'Hello there, Enter your details to sign in to your account',
 			signIn: 'Sign in',
+			signUp: 'Sign Up',
 			email: {
 				label: 'Enter email',
 				required: 'Email is required',
@@ -14,6 +15,13 @@ export const en = {
 				required: 'Password is required',
 			},
 			forgotPassword: 'Having trouble signing in?',
+			signInWith: 'Or Sign in with',
+			social: {
+				apple: 'Apple ID',
+				facebook: 'Facebook',
+				google: 'Google',
+			},
+			haveAccount: "Don't have an account?",
 		},
 	},
 };
