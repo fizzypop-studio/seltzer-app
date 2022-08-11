@@ -103,9 +103,4 @@ export const BoxFooterWrapper = styled.div`
 
 export const FooterWrapper = styled.div`
 	margin-top: 1rem;
-
-	p,
-	a {
-		color: #fff;
-	}
 `;
