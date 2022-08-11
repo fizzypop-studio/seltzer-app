@@ -41,14 +41,30 @@ const Login = () => {
 
 	return (
 		<S.Wrapper>
+			<S.HeaderWrapper>
+				<S.LogoWrapper>
+					<Typography variant="h5">SELTZER</Typography>
+				</S.LogoWrapper>
+				<S.HeaderActionWrapper>
+					<Link
+						text={t('auth.signUp')}
+						href="/sign-up"
+						className="sign-up-button"
+					/>
+					<Button
+						text={t('auth.requestDemo')}
+						className="request-button"
+					/>
+				</S.HeaderActionWrapper>
+			</S.HeaderWrapper>
 			<Container className="container" maxWidth="sm">
 				<Box className="login-box">
-					<S.HeaderWrapper>
+					<S.BoxHeaderWrapper>
 						<Typography variant="h4">{t('auth.login')}</Typography>
 						<Typography variant="h6">
 							{t('auth.loginSubtitle')}
 						</Typography>
-					</S.HeaderWrapper>
+					</S.BoxHeaderWrapper>
 					<S.Form onSubmit={handleSubmit(onSubmit)}>
 						<TextInput
 							name="email"
@@ -61,6 +77,7 @@ const Login = () => {
 							required
 						/>
 						<TextInput
+							type="password"
 							name="password"
 							control={control}
 							label={t('auth.password.label')}
@@ -78,25 +95,35 @@ const Login = () => {
 								href="/forgot-password"
 							/>
 						</S.ForgotPasswordWrapper>
-						<Button text={t('auth.signIn')} type="submit" />
+						<Button
+							text={t('auth.signIn')}
+							type="submit"
+							fullWidth
+						/>
 					</S.Form>
 					<TextDivider text={t('auth.signInWith')} />
 					<S.ButtonWrapper>
-						<Stack direction="row" spacing={2}>
+						<Stack
+							direction={{ xs: 'column', sm: 'row' }}
+							spacing={2}
+						>
 							<Button
 								text={t('auth.social.google')}
 								variant="outlined"
 								startIcon={<Google />}
+								fullWidth
 							/>
 							<Button
 								text={t('auth.social.apple')}
 								variant="outlined"
 								startIcon={<Apple />}
+								fullWidth
 							/>
 							<Button
 								text={t('auth.social.facebook')}
 								variant="outlined"
 								startIcon={<Facebook />}
+								fullWidth
 							/>
 						</Stack>
 					</S.ButtonWrapper>
@@ -107,6 +134,12 @@ const Login = () => {
 						<Link text={t('auth.signUp')} href="/sign-up" />
 					</S.BoxFooterWrapper>
 				</Box>
+				<S.FooterWrapper>
+					<Typography variant="body1">
+						{t('general.copyright')} |{' '}
+						<Link text={t('general.privacyPolicy')} href="#" />
+					</Typography>
+				</S.FooterWrapper>
 			</Container>
 		</S.Wrapper>
 	);

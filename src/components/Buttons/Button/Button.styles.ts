@@ -1,8 +1,11 @@
 import styled from '@emotion/styled';
 import { Button } from '@mui/material';
 
-export const StyledButton = styled(Button)`
-	width: 100%;
-	padding: 1rem 0;
+type StyledButtonProps = {
+	fullWidth?: boolean;
+};
+
+export const StyledButton = styled(Button)<StyledButtonProps>`
+	width: ${({ fullWidth }) => (fullWidth ? '100%' : 'inherit')};
 	border-radius: 0.65rem;
 `;

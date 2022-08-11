@@ -1,27 +1,64 @@
 import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
+	position: fixed;
 	width: 100%;
-	height: 100%;
+	overflow: scroll;
 	background-image: url('https://bit.ly/3JJHNlG');
+	background-position: center center;
 	background-repeat: no-repeat;
+	background-attachment: fixed;
 	background-size: cover;
-	background-position: center;
 
 	.container {
 		display: flex;
+		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		height: inherit;
+		width: inherit;
 
 		.login-box {
 			background-color: #fff;
-			width: 100%;
 		}
 	}
 `;
 
 export const HeaderWrapper = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	height: 3rem;
+	padding: 0.75rem 4rem 1rem;
+
+	@media (max-width: 768px) {
+		padding: 0.75rem 1rem 1rem;
+	}
+`;
+
+export const LogoWrapper = styled.div`
+	color: #fff;
+`;
+
+export const HeaderActionWrapper = styled.div`
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 75%;
+
+	.request-button {
+		width: 12rem;
+		margin-left: 1rem;
+	}
+
+	@media (max-width: 768px) {
+		.sign-up-button {
+			display: none;
+		}
+	}
+`;
+
+export const BoxHeaderWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -57,4 +94,8 @@ export const BoxFooterWrapper = styled.div`
 	a {
 		margin-left: 0.25rem;
 	}
+`;
+
+export const FooterWrapper = styled.div`
+	margin-top: 1rem;
 `;

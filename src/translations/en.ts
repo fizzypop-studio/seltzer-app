@@ -22,6 +22,11 @@ export const en = {
 				google: 'Google',
 			},
 			haveAccount: "Don't have an account?",
+			requestDemo: 'Request Demo',
+		},
+		general: {
+			copyright: 'Copyright @fizzypopstudio',
+			privacyPolicy: 'Privacy Policy',
 		},
 	},
 };

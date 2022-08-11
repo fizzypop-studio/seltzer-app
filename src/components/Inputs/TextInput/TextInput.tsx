@@ -1,8 +1,10 @@
-import { forwardRef, useRef } from 'react';
+import { useState, forwardRef, useRef } from 'react';
 import { Controller } from 'react-hook-form';
 import TextField, {
 	TextFieldProps as MUITextFieldProps,
 } from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import * as S from './TextInput.styles';
 
 type TextInputProps = MUITextFieldProps & {
@@ -10,27 +12,66 @@ type TextInputProps = MUITextFieldProps & {
 	control?: any;
 };
 
-export const TextInput = forwardRef(({ ...props }: TextInputProps, ref) => {
-	const componentRef = useRef<HTMLIFrameElement>(null);
-	const { name, control } = { ...props };
+export const TextInput = forwardRef(
+	({ type = 'text', ...props }: TextInputProps, ref) => {
+		const [showPassword, setShowPassword] = useState(false);
+		const componentRef = useRef<HTMLIFrameElement>(null);
+		const { name, control } = { ...props };
 
-	return (
-		<S.Wrapper>
-			<Controller
-				name={name}
-				control={control}
-				render={({ field: { onChange, value } }) => (
-					<TextField
-						ref={componentRef || ref}
-						onChange={onChange}
-						value={value || ''}
-						margin="dense"
-						className="text-input"
-						fullWidth
-						{...props}
-					/>
+		const handleClickShowPassword = () => {
+			setShowPassword(!showPassword);
+		};
+
+		const handleMouseDownPassword = (
+			event: React.MouseEvent<HTMLButtonElement>
+		) => {
+			event.preventDefault();
+		};
+
+		return (
+			<S.Wrapper>
+				<Controller
+					name={name}
+					control={control}
+					render={({ field: { onChange, value } }) =>
+						type === 'password' ? (
+							<TextField
+								type={showPassword ? 'text' : 'password'}
+								ref={componentRef || ref}
+								onChange={onChange}
+								value={value || ''}
+								margin="dense"
+								className="text-input"
+								fullWidth
+								{...props}
+							/>
+						) : (
+							<TextField
+								type={type}
+								ref={componentRef || ref}
+								onChange={onChange}
+								value={value || ''}
+								margin="dense"
+								className="text-input"
+								fullWidth
+								{...props}
+							/>
+						)
+					}
+				/>
+				{type === 'password' && (
+					<S.PasswordIconWrapper>
+						<IconButton
+							aria-label="toggle password visibility"
+							onClick={handleClickShowPassword}
+							onMouseDown={handleMouseDownPassword}
+							edge="end"
+						>
+							{showPassword ? <VisibilityOff /> : <Visibility />}
+						</IconButton>
+					</S.PasswordIconWrapper>
 				)}
-			/>
-		</S.Wrapper>
-	);
-});
+			</S.Wrapper>
+		);
+	}
+);
