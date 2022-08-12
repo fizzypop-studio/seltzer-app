@@ -17,6 +17,8 @@ import { useTranslation } from 'react-i18next';
 
 import { Google, Apple, Facebook } from '@mui/icons-material';
 
+import { EMAIL_REGEX } from '../../../helpers/regex';
+
 import * as S from './Login.styles';
 
 type LoginFormValues = {
@@ -32,7 +34,7 @@ const Login = () => {
 		.object({
 			email: yup
 				.string()
-				.email(t('auth.email.valid'))
+				.matches(EMAIL_REGEX, t('auth.email.valid'))
 				.required(t('auth.email.required')),
 			password: yup.string().required(),
 		})

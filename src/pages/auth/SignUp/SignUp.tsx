@@ -17,6 +17,8 @@ import { useTranslation } from 'react-i18next';
 
 import { Google, Apple, Facebook } from '@mui/icons-material';
 
+import { EMAIL_REGEX } from '../../../helpers/regex';
+
 import * as S from './SignUp.styles';
 
 type SignUpFormValues = {
@@ -37,7 +39,7 @@ const SignUp = () => {
 			lastName: yup.string().required(),
 			email: yup
 				.string()
-				.email(t('auth.email.valid'))
+				.matches(EMAIL_REGEX, t('auth.email.valid'))
 				.required(t('auth.email.required')),
 			password: yup.string().required(),
 			confirmPassword: yup.string().required(),

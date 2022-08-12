@@ -13,6 +13,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
+import { EMAIL_REGEX } from '../../../helpers/regex';
+
 import * as S from './ForgotPassword.styles';
 
 type ForgotPasswordFormValues = {
@@ -27,7 +29,7 @@ const ForgotPassword = () => {
 		.object({
 			email: yup
 				.string()
-				.email(t('auth.email.valid'))
+				.matches(EMAIL_REGEX, t('auth.email.valid'))
 				.required(t('auth.email.required')),
 		})
 		.required();
