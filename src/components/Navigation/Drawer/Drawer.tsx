@@ -14,9 +14,7 @@ import {
 	ChevronLeft,
 	ChevronRight,
 	Dashboard,
-	Mail,
 	Menu,
-	MoveToInbox,
 } from '@mui/icons-material';
 import { Typography, IconButton } from 'components';
 import * as S from './Drawer.styles';
