@@ -27,3 +27,8 @@ export { TextInput } from './Inputs/TextInput';
 Dividers
 *************/
 export { TextDivider } from './Dividers/TextDivider';
+
+/*************
+Navigation
+*************/
+export { Drawer } from './Navigation/Drawer';

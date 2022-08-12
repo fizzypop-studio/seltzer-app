@@ -1,10 +1,11 @@
+import { Drawer } from 'components';
 import * as S from './Dashboard.styles';
 
 const Dashboard = () => {
 	return (
-		<S.Wrapper>
-			<>Dashboard</>
-		</S.Wrapper>
+		<Drawer>
+			<>This is the dashboard</>
+		</Drawer>
 	);
 };
 
