@@ -45,7 +45,7 @@ const Router = () => {
 					/>
 
 					<Route path="/logout" element={<Logout />} />
-					<Route path="/" element={() => <Navigate to="/login" />} />
+					<Route path="/" element={<Navigate to="/login" />} />
 					<Route path="*" element={<ErrorPage />} />
 				</Routes>
 			)}

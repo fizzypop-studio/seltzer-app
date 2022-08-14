@@ -1,7 +1,7 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { ReduxUser } from '../types/Redux';
+import { ReduxUser } from 'types/Redux';
 
 export const RequireAuth: React.FC<{ children: JSX.Element }> = ({
 	children,

@@ -13,7 +13,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
-import { EMAIL_REGEX } from '../../../helpers/regex';
+import { EMAIL_REGEX } from 'helpers/regex';
 
 import * as S from './ForgotPassword.styles';
 
@@ -53,7 +53,7 @@ const ForgotPassword = () => {
 				</S.LogoWrapper>
 			</S.HeaderWrapper>
 			<Container className="container" maxWidth="sm">
-				<Box className="login-box">
+				<Box className="login-box" hasElevation>
 					<S.BoxHeaderWrapper>
 						<Typography variant="h4">
 							{t('auth.forgotPassword')}

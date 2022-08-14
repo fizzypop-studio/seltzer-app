@@ -17,7 +17,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Google, Apple, Facebook } from '@mui/icons-material';
 
-import { EMAIL_REGEX } from '../../../helpers/regex';
+import { EMAIL_REGEX } from 'helpers/regex';
 
 import * as S from './Login.styles';
 
@@ -70,7 +70,7 @@ const Login = () => {
 				</S.HeaderActionWrapper>
 			</S.HeaderWrapper>
 			<Container className="container" maxWidth="sm">
-				<Box className="login-box">
+				<Box className="login-box" hasElevation>
 					<S.BoxHeaderWrapper>
 						<Typography variant="h4">{t('auth.login')}</Typography>
 						<Typography variant="subtitle1">

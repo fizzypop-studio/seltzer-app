@@ -17,7 +17,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Google, Apple, Facebook } from '@mui/icons-material';
 
-import { EMAIL_REGEX } from '../../../helpers/regex';
+import { EMAIL_REGEX } from 'helpers/regex';
 
 import * as S from './SignUp.styles';
 
@@ -76,7 +76,7 @@ const SignUp = () => {
 				</S.HeaderActionWrapper>
 			</S.HeaderWrapper>
 			<Container className="container" maxWidth="sm">
-				<Box className="sign-up-box">
+				<Box className="sign-up-box" hasElevation>
 					<S.BoxHeaderWrapper>
 						<Typography variant="h4">{t('auth.signUp')}</Typography>
 						<Typography variant="subtitle1">

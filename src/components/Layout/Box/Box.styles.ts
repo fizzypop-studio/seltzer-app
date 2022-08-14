@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
 import { Box } from '@mui/material';
+import { BoxProps } from './Box';
 
-export const StyledBox = styled(Box)`
+export const StyledBox = styled(Box)<BoxProps>`
 	border-radius: 1rem;
-	box-shadow: 1rem 1rem 2.3rem 0 rgba(0, 0, 0, 0.2);
+	box-shadow: ${({ hasElevation }) =>
+		hasElevation ? '1rem 1rem 2.3rem 0 rgba(0, 0, 0, 0.2)' : 'none'};
 `;

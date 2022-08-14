@@ -1,12 +1,17 @@
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar, { AppBarProps as MUIAppBarProps } from '@mui/material/AppBar';
-import { styled, Theme, CSSObject } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
+import { styled, Theme, CSSObject, alpha } from '@mui/material/styles';
 
 type AppBarProps = MUIAppBarProps & {
 	open?: boolean;
 };
 
 const drawerWidth = 240;
+
+// This .styles file contains a different method as shown in the Material UI
+// docs for rendering styles rather than with emotion of traditional SCSS methods.
+// Feel free to refactor this or keep for reference. 🙂
 
 const openedMixin = (theme: Theme): CSSObject => ({
 	width: drawerWidth,
@@ -71,4 +76,46 @@ export const NavigationDrawer = styled(MuiDrawer, {
 		...closedMixin(theme),
 		'& .MuiDrawer-paper': closedMixin(theme),
 	}),
+}));
+
+export const Search = styled('div')(({ theme }) => ({
+	position: 'relative',
+	borderRadius: theme.shape.borderRadius,
+	backgroundColor: alpha(theme.palette.common.white, 0.15),
+	'&:hover': {
+		backgroundColor: alpha(theme.palette.common.white, 0.25),
+	},
+	marginRight: theme.spacing(2),
+	marginLeft: 0,
+	width: '100%',
+	[theme.breakpoints.up('sm')]: {
+		marginLeft: theme.spacing(3),
+		width: 'auto',
+	},
+	[theme.breakpoints.down('sm')]: {
+		display: 'none',
+	},
+}));
+
+export const SearchIconWrapper = styled('div')(({ theme }) => ({
+	padding: theme.spacing(0, 2),
+	height: '100%',
+	position: 'absolute',
+	pointerEvents: 'none',
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'center',
+}));
+
+export const StyledInputBase = styled(InputBase)(({ theme }) => ({
+	color: 'inherit',
+	'& .MuiInputBase-input': {
+		padding: theme.spacing(1, 1, 1, 0),
+		paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+		transition: theme.transitions.create('width'),
+		width: '100%',
+		[theme.breakpoints.up('md')]: {
+			width: '20ch',
+		},
+	},
 }));

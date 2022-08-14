@@ -1,22 +1,28 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+import Badge from '@mui/material/Badge';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
-
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import {
+	AccountCircle,
 	ChevronLeft,
 	ChevronRight,
 	Dashboard,
-	Menu,
+	Search,
+	Menu as MenuIcon,
+	More,
+	Notifications,
 } from '@mui/icons-material';
-import { Typography, IconButton } from 'components';
+import { Box, Typography, IconButton } from 'components';
+import { useWindowDimensions } from 'hooks/use-window-dimensions';
 import * as S from './Drawer.styles';
 
 type DrawerProps = {
@@ -25,7 +31,11 @@ type DrawerProps = {
 
 export const Drawer = ({ children }: DrawerProps) => {
 	const theme = useTheme();
-	const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = useState<boolean>(false);
+	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
+		useState<null | HTMLElement>(null);
+	const { isMobile } = useWindowDimensions();
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -35,6 +45,92 @@ export const Drawer = ({ children }: DrawerProps) => {
 		setOpen(false);
 	};
 
+	const isMenuOpen = Boolean(anchorEl);
+	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+	const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handleMobileMenuClose = () => {
+		setMobileMoreAnchorEl(null);
+	};
+
+	const handleMenuClose = () => {
+		setAnchorEl(null);
+		handleMobileMenuClose();
+	};
+
+	const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+		setMobileMoreAnchorEl(event.currentTarget);
+	};
+
+	const menuId = 'primary-search-account-menu';
+	const renderMenu = (
+		<Menu
+			anchorEl={anchorEl}
+			anchorOrigin={{
+				vertical: 'top',
+				horizontal: 'right',
+			}}
+			id={menuId}
+			keepMounted
+			transformOrigin={{
+				vertical: 'top',
+				horizontal: 'right',
+			}}
+			open={isMenuOpen}
+			onClose={handleMenuClose}
+		>
+			<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+			<MenuItem onClick={handleMenuClose}>My account</MenuItem>
+		</Menu>
+	);
+
+	const mobileMenuId = 'primary-search-account-menu-mobile';
+	const renderMobileMenu = (
+		<Menu
+			anchorEl={mobileMoreAnchorEl}
+			anchorOrigin={{
+				vertical: 'top',
+				horizontal: 'right',
+			}}
+			id={mobileMenuId}
+			keepMounted
+			transformOrigin={{
+				vertical: 'top',
+				horizontal: 'right',
+			}}
+			open={isMobileMenuOpen}
+			onClose={handleMobileMenuClose}
+		>
+			<MenuItem>
+				<IconButton
+					icon={
+						<Badge badgeContent={17} color="error">
+							<Notifications />
+						</Badge>
+					}
+					size="large"
+					aria-label="show 17 new notifications"
+					color="inherit"
+				></IconButton>
+				<p>Notifications</p>
+			</MenuItem>
+			<MenuItem onClick={handleProfileMenuOpen}>
+				<IconButton
+					icon={<AccountCircle />}
+					size="large"
+					aria-label="account of current user"
+					aria-controls="primary-search-account-menu"
+					aria-haspopup="true"
+					color="inherit"
+				></IconButton>
+				<p>Profile</p>
+			</MenuItem>
+		</Menu>
+	);
+
 	const navigationItems = [{ label: 'Dashboard', icon: <Dashboard /> }];
 
 	return (
@@ -43,7 +139,7 @@ export const Drawer = ({ children }: DrawerProps) => {
 			<S.AppBar position="fixed" open={open}>
 				<Toolbar>
 					<IconButton
-						icon={<Menu />}
+						icon={<MenuIcon />}
 						color="inherit"
 						aria-label="open drawer"
 						onClick={handleDrawerOpen}
@@ -56,9 +152,58 @@ export const Drawer = ({ children }: DrawerProps) => {
 					<Typography variant="h6" noWrap>
 						SELTZER
 					</Typography>
+					<S.Search>
+						<S.SearchIconWrapper>
+							<Search />
+						</S.SearchIconWrapper>
+						<S.StyledInputBase
+							placeholder="Search…"
+							inputProps={{ 'aria-label': 'search' }}
+						/>
+					</S.Search>
+					<Box sx={{ flexGrow: 1 }} />
+					<Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+						<IconButton
+							icon={
+								<Badge badgeContent={17} color="error">
+									<Notifications />
+								</Badge>
+							}
+							size="large"
+							aria-label="show 17 new notifications"
+							color="inherit"
+						></IconButton>
+						<IconButton
+							icon={<AccountCircle />}
+							size="large"
+							edge="end"
+							aria-label="account of current user"
+							aria-controls={menuId}
+							aria-haspopup="true"
+							onClick={handleProfileMenuOpen}
+							color="inherit"
+						></IconButton>
+					</Box>
+					<Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+						<IconButton
+							icon={<More />}
+							size="large"
+							aria-label="show more"
+							aria-controls={mobileMenuId}
+							aria-haspopup="true"
+							onClick={handleMobileMenuOpen}
+							color="inherit"
+						></IconButton>
+					</Box>
 				</Toolbar>
 			</S.AppBar>
-			<S.NavigationDrawer variant="permanent" open={open}>
+			<S.NavigationDrawer
+				ModalProps={{
+					keepMounted: isMobile,
+				}}
+				variant={isMobile ? 'temporary' : 'permanent'}
+				open={open}
+			>
 				<S.DrawerHeader>
 					<IconButton
 						icon={
@@ -108,6 +253,8 @@ export const Drawer = ({ children }: DrawerProps) => {
 				<S.DrawerHeader />
 				{children}
 			</Box>
+			{renderMobileMenu}
+			{renderMenu}
 		</Box>
 	);
 };
