@@ -1,10 +1,10 @@
-import { Drawer } from 'components';
+import { Drawer, Typography } from 'components';
 import * as S from './Dashboard.styles';
 
 const Dashboard = () => {
 	return (
 		<Drawer>
-			<>This is the dashboard</>
+			<Typography variant="h5">Hello there!</Typography>
 		</Drawer>
 	);
 };

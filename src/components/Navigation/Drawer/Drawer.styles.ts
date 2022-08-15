@@ -2,6 +2,7 @@ import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar, { AppBarProps as MUIAppBarProps } from '@mui/material/AppBar';
 import InputBase from '@mui/material/InputBase';
 import { styled, Theme, CSSObject, alpha } from '@mui/material/styles';
+import { Box } from 'components';
 
 type AppBarProps = MUIAppBarProps & {
 	open?: boolean;
@@ -20,6 +21,9 @@ const openedMixin = (theme: Theme): CSSObject => ({
 		duration: theme.transitions.duration.enteringScreen,
 	}),
 	overflowX: 'hidden',
+	[theme.breakpoints.down('sm')]: {
+		width: '100%',
+	},
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
@@ -33,6 +37,14 @@ const closedMixin = (theme: Theme): CSSObject => ({
 		width: `calc(${theme.spacing(8)} + 1px)`,
 	},
 });
+
+export const Wrapper = styled(Box)`
+	padding: 0;
+
+	.drawer-content {
+		background-color: #fff;
+	}
+`;
 
 export const DrawerHeader = styled('div')(({ theme }) => ({
 	display: 'flex',
@@ -51,6 +63,7 @@ export const AppBar = styled(MuiAppBar, {
 		easing: theme.transitions.easing.sharp,
 		duration: theme.transitions.duration.leavingScreen,
 	}),
+	borderBottom: '1px solid #D3D3D3',
 	...(open && {
 		marginLeft: drawerWidth,
 		width: `calc(100% - ${drawerWidth}px)`,
@@ -58,6 +71,9 @@ export const AppBar = styled(MuiAppBar, {
 			easing: theme.transitions.easing.sharp,
 			duration: theme.transitions.duration.enteringScreen,
 		}),
+		[theme.breakpoints.down('sm')]: {
+			width: 0,
+		},
 	}),
 }));
 

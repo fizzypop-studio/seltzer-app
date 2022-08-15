@@ -32,3 +32,4 @@ export { TextDivider } from './Dividers/TextDivider';
 Navigation
 *************/
 export { Drawer } from './Navigation/Drawer';
+export { Toolbar } from './Navigation/Drawer/Toolbar';

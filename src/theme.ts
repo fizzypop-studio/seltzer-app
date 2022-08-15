@@ -4,14 +4,14 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
 	palette: {
 		primary: {
-			main: '#443850',
+			main: '#252627',
 			contrastText: '#fff', //button text white instead of black
 		},
 		background: {
-			default: '#394764',
+			default: '#FAF9F6',
 		},
 		secondary: {
-			main: '#19857b',
+			main: '#E16F7C',
 		},
 		error: {
 			main: red.A400,

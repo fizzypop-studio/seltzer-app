@@ -1,6 +1,6 @@
-import styled from '@emotion/styled';
+import { styled } from '@mui/material/styles';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled('div')`
 	display: flex;
 	align-items: center;
 	.text-input {
@@ -10,4 +10,4 @@ export const Wrapper = styled.div`
 	}
 `;
 
-export const PasswordIconWrapper = styled.div``;
+export const PasswordIconWrapper = styled('div')``;

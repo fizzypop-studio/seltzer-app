@@ -1,6 +1,6 @@
-import styled from '@emotion/styled';
+import { styled } from '@mui/material/styles';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled('div')`
 	position: fixed;
 	width: 100%;
 	overflow: scroll;
@@ -24,7 +24,7 @@ export const Wrapper = styled.div`
 	}
 `;
 
-export const HeaderWrapper = styled.div`
+export const HeaderWrapper = styled('div')`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -37,11 +37,11 @@ export const HeaderWrapper = styled.div`
 	}
 `;
 
-export const LogoWrapper = styled.div`
+export const LogoWrapper = styled('div')`
 	color: #fff;
 `;
 
-export const BoxHeaderWrapper = styled.div`
+export const BoxHeaderWrapper = styled('div')`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -55,7 +55,7 @@ export const BoxHeaderWrapper = styled.div`
 	}
 `;
 
-export const Form = styled.form`
+export const Form = styled('form')`
 	margin: 2rem 0;
 
 	.submit-button {
@@ -63,7 +63,7 @@ export const Form = styled.form`
 	}
 `;
 
-export const BoxFooterWrapper = styled.div`
+export const BoxFooterWrapper = styled('div')`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -75,6 +75,6 @@ export const BoxFooterWrapper = styled.div`
 	}
 `;
 
-export const FooterWrapper = styled.div`
+export const FooterWrapper = styled('div')`
 	margin-top: 1rem;
 `;

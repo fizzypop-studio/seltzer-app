@@ -1,10 +1,10 @@
-import styled from '@emotion/styled';
+import { styled } from '@mui/material/styles';
 
 type StyledTextDividerProps = {
 	fullWidth?: boolean;
 };
 
-export const StyledTextDivider = styled.div<StyledTextDividerProps>`
+export const StyledTextDivider = styled('div')<StyledTextDividerProps>`
 	display: flex;
 	justify-content: center;
 	align-items: center;

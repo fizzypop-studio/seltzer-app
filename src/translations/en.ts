@@ -50,6 +50,19 @@ export const en = {
 		general: {
 			copyright: 'Copyright @fizzypopstudio',
 			privacyPolicy: 'Privacy Policy',
+			placeholders: {
+				search: 'Search...',
+			},
+		},
+		navigation: {
+			pages: {
+				dashboard: 'Dashboard',
+				users: 'Users',
+				notifications: 'Notifications',
+				profile: 'Profile',
+				logout: 'Logout',
+			},
+			myAccount: 'My Account',
 		},
 	},
 };

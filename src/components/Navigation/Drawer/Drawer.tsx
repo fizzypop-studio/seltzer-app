@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
-import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
@@ -11,18 +10,22 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import Avatar from '@mui/material/Avatar';
+import Tooltip from '@mui/material/Tooltip';
 import {
 	AccountCircle,
 	ChevronLeft,
 	ChevronRight,
 	Dashboard,
+	Group,
 	Search,
 	Menu as MenuIcon,
 	More,
 	Notifications,
 } from '@mui/icons-material';
-import { Box, Typography, IconButton } from 'components';
+import { Box, Typography, IconButton, Toolbar } from 'components';
 import { useWindowDimensions } from 'hooks/use-window-dimensions';
+import { useTranslation } from 'react-i18next';
 import * as S from './Drawer.styles';
 
 type DrawerProps = {
@@ -30,12 +33,27 @@ type DrawerProps = {
 };
 
 export const Drawer = ({ children }: DrawerProps) => {
-	const theme = useTheme();
 	const [open, setOpen] = useState<boolean>(false);
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
 		useState<null | HTMLElement>(null);
+	const theme = useTheme();
 	const { isMobile } = useWindowDimensions();
+	const { t } = useTranslation();
+
+	// Change this to update navigation items for the sidebar
+	const navigationItems = [
+		{
+			label: t('navigation.pages.dashboard'),
+			icon: <Dashboard />,
+			to: '/dashboard',
+		},
+		{
+			label: t('navigation.pages.users'),
+			icon: <Group />,
+			to: '/users',
+		},
+	];
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -82,8 +100,12 @@ export const Drawer = ({ children }: DrawerProps) => {
 			open={isMenuOpen}
 			onClose={handleMenuClose}
 		>
-			<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-			<MenuItem onClick={handleMenuClose}>My account</MenuItem>
+			<MenuItem onClick={handleMenuClose}>
+				{t('navigation.myAccount')}
+			</MenuItem>
+			<MenuItem onClick={handleMenuClose}>
+				{t('navigation.pages.logout')}
+			</MenuItem>
 		</Menu>
 	);
 
@@ -112,36 +134,33 @@ export const Drawer = ({ children }: DrawerProps) => {
 						</Badge>
 					}
 					size="large"
-					aria-label="show 17 new notifications"
 					color="inherit"
 				></IconButton>
-				<p>Notifications</p>
+				<Typography variant="body1">
+					{t('navigation.pages.notifications')}
+				</Typography>
 			</MenuItem>
 			<MenuItem onClick={handleProfileMenuOpen}>
 				<IconButton
 					icon={<AccountCircle />}
 					size="large"
-					aria-label="account of current user"
-					aria-controls="primary-search-account-menu"
-					aria-haspopup="true"
 					color="inherit"
 				></IconButton>
-				<p>Profile</p>
+				<Typography variant="body1">
+					{t('navigation.myAccount')}
+				</Typography>
 			</MenuItem>
 		</Menu>
 	);
 
-	const navigationItems = [{ label: 'Dashboard', icon: <Dashboard /> }];
-
 	return (
-		<Box sx={{ display: 'flex' }}>
+		<S.Wrapper sx={{ display: 'flex' }}>
 			<CssBaseline />
-			<S.AppBar position="fixed" open={open}>
+			<S.AppBar position="fixed" open={open} elevation={0}>
 				<Toolbar>
 					<IconButton
 						icon={<MenuIcon />}
 						color="inherit"
-						aria-label="open drawer"
 						onClick={handleDrawerOpen}
 						edge="start"
 						sx={{
@@ -157,8 +176,7 @@ export const Drawer = ({ children }: DrawerProps) => {
 							<Search />
 						</S.SearchIconWrapper>
 						<S.StyledInputBase
-							placeholder="Search…"
-							inputProps={{ 'aria-label': 'search' }}
+							placeholder={t('general.placeholders.search')}
 						/>
 					</S.Search>
 					<Box sx={{ flexGrow: 1 }} />
@@ -170,25 +188,25 @@ export const Drawer = ({ children }: DrawerProps) => {
 								</Badge>
 							}
 							size="large"
-							aria-label="show 17 new notifications"
 							color="inherit"
 						></IconButton>
-						<IconButton
-							icon={<AccountCircle />}
-							size="large"
-							edge="end"
-							aria-label="account of current user"
-							aria-controls={menuId}
-							aria-haspopup="true"
-							onClick={handleProfileMenuOpen}
-							color="inherit"
-						></IconButton>
+						<Tooltip title="Account Settings">
+							<IconButton
+								icon={
+									<Avatar
+										alt="Bruce Wayne"
+										src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png"
+									/>
+								}
+								onClick={handleProfileMenuOpen}
+								sx={{ p: 0 }}
+							></IconButton>
+						</Tooltip>
 					</Box>
 					<Box sx={{ display: { xs: 'flex', md: 'none' } }}>
 						<IconButton
 							icon={<More />}
 							size="large"
-							aria-label="show more"
 							aria-controls={mobileMenuId}
 							aria-haspopup="true"
 							onClick={handleMobileMenuOpen}
@@ -249,12 +267,16 @@ export const Drawer = ({ children }: DrawerProps) => {
 					))}
 				</List>
 			</S.NavigationDrawer>
-			<Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+			<Box
+				component="main"
+				className="drawer-content"
+				sx={{ flexGrow: 1, p: 3 }}
+			>
 				<S.DrawerHeader />
 				{children}
 			</Box>
 			{renderMobileMenu}
 			{renderMenu}
-		</Box>
+		</S.Wrapper>
 	);
 };
