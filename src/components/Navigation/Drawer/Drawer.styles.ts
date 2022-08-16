@@ -63,7 +63,7 @@ export const AppBar = styled(MuiAppBar, {
 		easing: theme.transitions.easing.sharp,
 		duration: theme.transitions.duration.leavingScreen,
 	}),
-	borderBottom: '1px solid #D3D3D3',
+	borderBottom: '1px solid #ececec',
 	...(open && {
 		marginLeft: drawerWidth,
 		width: `calc(100% - ${drawerWidth}px)`,
@@ -92,6 +92,15 @@ export const NavigationDrawer = styled(MuiDrawer, {
 		...closedMixin(theme),
 		'& .MuiDrawer-paper': closedMixin(theme),
 	}),
+}));
+
+export const DrawerFooter = styled('div')(() => ({
+	position: 'absolute',
+	bottom: 0,
+	right: 0,
+	left: 0,
+	width: drawerWidth,
+	padding: '1rem',
 }));
 
 export const Search = styled('div')(({ theme }) => ({
@@ -135,3 +144,7 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
 		},
 	},
 }));
+
+export const UpgradeCard = styled('div')`
+	padding: 1rem;
+`;

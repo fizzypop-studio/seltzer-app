@@ -3,12 +3,11 @@ import * as S from './TextDivider.styles';
 
 export type TextDividerProps = {
 	text: string;
-	fullWidth?: boolean;
 };
 
-export const TextDivider = ({ text, fullWidth }: TextDividerProps) => {
+export const TextDivider = ({ text }: TextDividerProps) => {
 	return (
-		<S.StyledTextDivider fullWidth={fullWidth}>
+		<S.StyledTextDivider>
 			<Typography variant="body1">
 				<span>{text}</span>
 			</Typography>

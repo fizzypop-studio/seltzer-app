@@ -57,7 +57,7 @@ export const en = {
 		navigation: {
 			pages: {
 				dashboard: 'Dashboard',
-				users: 'Users',
+				team: 'Team',
 				notifications: 'Notifications',
 				profile: 'Profile',
 				logout: 'Logout',

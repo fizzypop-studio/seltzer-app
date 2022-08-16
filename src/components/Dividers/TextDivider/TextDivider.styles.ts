@@ -1,17 +1,13 @@
 import { styled } from '@mui/material/styles';
 
-type StyledTextDividerProps = {
-	fullWidth?: boolean;
-};
-
-export const StyledTextDivider = styled('div')<StyledTextDividerProps>`
+export const StyledTextDivider = styled('div')`
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
 
 	p {
-		width: ${({ fullWidth }) => (fullWidth ? '100%' : '50%')};
+		width: 50%;
 		text-align: center;
 		border-bottom: 1px solid #000;
 		line-height: 0.1em;

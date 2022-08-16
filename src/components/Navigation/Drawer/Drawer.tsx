@@ -3,7 +3,6 @@ import { useTheme } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import ListItem from '@mui/material/ListItem';
@@ -11,7 +10,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
 import {
 	AccountCircle,
 	ChevronLeft,
@@ -23,7 +21,7 @@ import {
 	More,
 	Notifications,
 } from '@mui/icons-material';
-import { Box, Typography, IconButton, Toolbar } from 'components';
+import { Box, Typography, IconButton, Toolbar, UpgradeCard } from 'components';
 import { useWindowDimensions } from 'hooks/use-window-dimensions';
 import { useTranslation } from 'react-i18next';
 import * as S from './Drawer.styles';
@@ -49,9 +47,9 @@ export const Drawer = ({ children }: DrawerProps) => {
 			to: '/dashboard',
 		},
 		{
-			label: t('navigation.pages.users'),
+			label: t('navigation.pages.team'),
 			icon: <Group />,
-			to: '/users',
+			to: '/team',
 		},
 	];
 
@@ -190,18 +188,16 @@ export const Drawer = ({ children }: DrawerProps) => {
 							size="large"
 							color="inherit"
 						></IconButton>
-						<Tooltip title="Account Settings">
-							<IconButton
-								icon={
-									<Avatar
-										alt="Bruce Wayne"
-										src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png"
-									/>
-								}
-								onClick={handleProfileMenuOpen}
-								sx={{ p: 0 }}
-							></IconButton>
-						</Tooltip>
+						<IconButton
+							icon={
+								<Avatar
+									alt="Bruce Wayne"
+									src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png"
+								/>
+							}
+							onClick={handleProfileMenuOpen}
+							sx={{ p: 0 }}
+						></IconButton>
 					</Box>
 					<Box sx={{ display: { xs: 'flex', md: 'none' } }}>
 						<IconButton
@@ -234,7 +230,6 @@ export const Drawer = ({ children }: DrawerProps) => {
 						onClick={handleDrawerClose}
 					/>
 				</S.DrawerHeader>
-				<Divider />
 				<List>
 					{navigationItems.map((item) => (
 						<ListItem
@@ -266,6 +261,14 @@ export const Drawer = ({ children }: DrawerProps) => {
 						</ListItem>
 					))}
 				</List>
+				{open && (
+					<S.DrawerFooter>
+						<UpgradeCard
+							content="Upgrade to PRO for more users"
+							buttonText="Upgrade"
+						/>
+					</S.DrawerFooter>
+				)}
 			</S.NavigationDrawer>
 			<Box
 				component="main"
