@@ -15,13 +15,20 @@ import {
 	ChevronLeft,
 	ChevronRight,
 	Dashboard,
+	ElectricBolt,
 	Group,
 	Search,
 	Menu as MenuIcon,
 	More,
 	Notifications,
 } from '@mui/icons-material';
-import { Box, Typography, IconButton, Toolbar, UpgradeCard } from 'components';
+import {
+	Box,
+	Typography,
+	IconButton,
+	Toolbar,
+	IconActionCard,
+} from 'components';
 import { useWindowDimensions } from 'hooks/use-window-dimensions';
 import { useTranslation } from 'react-i18next';
 import * as S from './Drawer.styles';
@@ -263,8 +270,9 @@ export const Drawer = ({ children }: DrawerProps) => {
 				</List>
 				{open && (
 					<S.DrawerFooter>
-						<UpgradeCard
+						<IconActionCard
 							content="Upgrade to PRO for more users"
+							icon={<ElectricBolt />}
 							buttonText="Upgrade"
 						/>
 					</S.DrawerFooter>

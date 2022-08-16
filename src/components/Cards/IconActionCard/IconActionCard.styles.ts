@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
 import { Card } from 'components';
 
-export const StyledUpgradeCard = styled(Card)`
+export const StyledIconActionCard = styled(Card)`
 	display: flex;
 	flex-direction: column;
 	align-items: center;

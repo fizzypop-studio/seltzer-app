@@ -1,28 +1,27 @@
 /* eslint-disable import/named */
-import * as S from './UpgradeCard.styles';
+import * as S from './IconActionCard.styles';
 import { CardProps as MUICardProps } from '@mui/material/Card';
 import { Button, Typography } from 'components';
-import { ElectricBolt } from '@mui/icons-material';
 
-type UpgradeCardProps = MUICardProps & {
+type IconActionCardProps = MUICardProps & {
 	content: string;
+	icon: React.ReactElement;
 	buttonText?: string;
 };
 
-export const UpgradeCard = ({
+export const IconActionCard = ({
 	content,
+	icon,
 	buttonText,
 	...props
-}: UpgradeCardProps) => {
+}: IconActionCardProps) => {
 	return (
-		<S.StyledUpgradeCard elevation={0} {...props}>
-			<S.IconWrapper>
-				<ElectricBolt />
-			</S.IconWrapper>
+		<S.StyledIconActionCard elevation={0} {...props}>
+			<S.IconWrapper>{icon}</S.IconWrapper>
 			<Typography variant="body1" className="content">
 				{content}
 			</Typography>
 			{buttonText && <Button text={buttonText} />}
-		</S.StyledUpgradeCard>
+		</S.StyledIconActionCard>
 	);
 };

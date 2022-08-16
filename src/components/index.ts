@@ -14,7 +14,7 @@ export { IconButton } from './Buttons/IconButton';
 Cards
 *************/
 export { Card } from './Cards/Card';
-export { UpgradeCard } from './Cards/UpgradeCard';
+export { IconActionCard } from './Cards/IconActionCard';
 
 /*************
 Layout
