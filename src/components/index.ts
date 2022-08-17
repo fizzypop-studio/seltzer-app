@@ -14,6 +14,7 @@ export { IconButton } from './Buttons/IconButton';
 Cards
 *************/
 export { Card } from './Cards/Card';
+export { DataCard } from './Cards/DataCard';
 export { IconActionCard } from './Cards/IconActionCard';
 
 /*************
@@ -21,6 +22,7 @@ Layout
 *************/
 export { Box } from './Layout/Box';
 export { Container } from './Layout/Container';
+export { Grid } from './Layout/Grid';
 export { Paper } from './Layout/Paper';
 export { Stack } from './Layout/Stack';
 

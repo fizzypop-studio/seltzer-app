@@ -1,3 +1,5 @@
 import { styled } from '@mui/material/styles';
 
-export const Wrapper = styled('div')``;
+export const DataWrapper = styled('div')`
+	margin: 2rem 0 1rem;
+`;

@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const user = {
-	id: '123456',
-	firstName: 'Seth',
-	lasName: 'Carrino',
-	email: 'sethcarrino@gmail.com',
+	id: 'id-123456',
+	firstName: 'Michael',
+	lasName: 'Scarn',
+	email: 'michaelscarn@test.com',
 };
 
 export const userSlice = createSlice({

@@ -10,7 +10,7 @@ export const parameters = {
 
 import { ThemeProvider } from '@mui/material/styles';
 import { ThemeProvider as Emotion10ThemeProvider } from '@emotion/react';
-import theme from 'theme';
+import { theme } from 'theme';
 
 export const decorators = [
   (Story) => (
