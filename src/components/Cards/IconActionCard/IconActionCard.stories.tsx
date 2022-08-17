@@ -13,5 +13,6 @@ export const Default: ComponentStory<typeof IconActionCard> = () => (
 		content="Do you want to upgrade?"
 		icon={<ElectricBolt />}
 		buttonText="Upgrade"
+		onClick={() => console.log('Upgrade Account')}
 	/>
 );

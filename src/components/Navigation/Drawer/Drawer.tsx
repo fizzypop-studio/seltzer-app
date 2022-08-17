@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import List from '@mui/material/List';
@@ -23,6 +24,7 @@ import {
 	Notifications,
 } from '@mui/icons-material';
 import {
+	ActionModal,
 	Box,
 	Typography,
 	IconButton,
@@ -39,12 +41,16 @@ type DrawerProps = {
 
 export const Drawer = ({ children }: DrawerProps) => {
 	const [open, setOpen] = useState<boolean>(false);
+	const [logoutModalOpen, setLogoutModalOpen] = useState<boolean>(false);
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
 		useState<null | HTMLElement>(null);
+	const navigate = useNavigate();
 	const theme = useTheme();
 	const { isMobile } = useWindowDimensions();
 	const { t } = useTranslation();
+
+	const notificationCount = 17;
 
 	// Change this to update navigation items for the sidebar
 	const navigationItems = [
@@ -88,6 +94,22 @@ export const Drawer = ({ children }: DrawerProps) => {
 		setMobileMoreAnchorEl(event.currentTarget);
 	};
 
+	const handleOpenLogoutModal = () => {
+		setLogoutModalOpen(true);
+	};
+
+	const handleCloseLogoutModal = () => {
+		setLogoutModalOpen(false);
+	};
+
+	const handleLogout = () => {
+		navigate('/logout');
+	};
+
+	const handleUpgrade = () => {
+		console.log('Upgrade Account');
+	};
+
 	const menuId = 'primary-search-account-menu';
 	const renderMenu = (
 		<Menu
@@ -108,7 +130,7 @@ export const Drawer = ({ children }: DrawerProps) => {
 			<MenuItem onClick={handleMenuClose}>
 				{t('navigation.myAccount')}
 			</MenuItem>
-			<MenuItem onClick={handleMenuClose}>
+			<MenuItem onClick={handleOpenLogoutModal}>
 				{t('navigation.pages.logout')}
 			</MenuItem>
 		</Menu>
@@ -134,7 +156,7 @@ export const Drawer = ({ children }: DrawerProps) => {
 			<MenuItem>
 				<IconButton
 					icon={
-						<Badge badgeContent={17} color="error">
+						<Badge badgeContent={notificationCount} color="error">
 							<Notifications />
 						</Badge>
 					}
@@ -188,7 +210,10 @@ export const Drawer = ({ children }: DrawerProps) => {
 					<Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 						<IconButton
 							icon={
-								<Badge badgeContent={17} color="error">
+								<Badge
+									badgeContent={notificationCount}
+									color="error"
+								>
 									<Notifications />
 								</Badge>
 							}
@@ -274,6 +299,7 @@ export const Drawer = ({ children }: DrawerProps) => {
 							content="Upgrade to PRO for more users"
 							icon={<ElectricBolt />}
 							buttonText="Upgrade"
+							onClick={handleUpgrade}
 						/>
 					</S.DrawerFooter>
 				)}
@@ -288,6 +314,15 @@ export const Drawer = ({ children }: DrawerProps) => {
 			</Box>
 			{renderMobileMenu}
 			{renderMenu}
+			<ActionModal
+				open={logoutModalOpen}
+				onClose={handleCloseLogoutModal}
+				title="Logout User"
+				content="Are you sure you want to log out?"
+				actionText="Logout"
+				onActionClick={handleLogout}
+				onRequestClose={handleCloseLogoutModal}
+			/>
 		</S.Wrapper>
 	);
 };

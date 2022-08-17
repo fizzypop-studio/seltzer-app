@@ -6,13 +6,15 @@ import { Button, Typography } from 'components';
 type IconActionCardProps = MUICardProps & {
 	content: string;
 	icon: React.ReactElement;
-	buttonText?: string;
+	buttonText: string;
+	onClick: () => void;
 };
 
 export const IconActionCard = ({
 	content,
 	icon,
 	buttonText,
+	onClick,
 	...props
 }: IconActionCardProps) => {
 	return (
@@ -21,7 +23,7 @@ export const IconActionCard = ({
 			<Typography variant="body1" className="content">
 				{content}
 			</Typography>
-			{buttonText && <Button text={buttonText} />}
+			<Button text={buttonText} onClick={onClick} />
 		</S.StyledIconActionCard>
 	);
 };

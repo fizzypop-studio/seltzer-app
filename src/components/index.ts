@@ -39,3 +39,8 @@ Navigation
 *************/
 export { Drawer } from './Navigation/Drawer';
 export { Toolbar } from './Navigation/Drawer/Toolbar';
+
+/*************
+Modals
+*************/
+export { ActionModal } from './Modals/ActionModal';
