@@ -46,6 +46,9 @@ export const en = {
 			havePassword: 'Have your password?',
 			requestDemo: 'Request Demo',
 			createAccount: 'Create Account',
+			logout: 'Logout',
+			logoutUser: 'Logout User',
+			areYouSureLogout: 'Are you sure you want to log out?',
 		},
 		general: {
 			copyright: 'Copyright @fizzypopstudio',
@@ -53,6 +56,8 @@ export const en = {
 			placeholders: {
 				search: 'Search...',
 			},
+			upgrade: 'Upgrade',
+			goPro: 'Upgrade to PRO for more users',
 		},
 		navigation: {
 			pages: {
@@ -63,6 +68,16 @@ export const en = {
 				logout: 'Logout',
 			},
 			myAccount: 'My Account',
+		},
+		pages: {
+			dashboard: {
+				title: 'Dashboard',
+				welcome: 'Welcome back',
+				weeklySales: 'Weekly Sales',
+				newUsers: 'New Users',
+				itemOrders: 'Item Orders',
+				bugReports: 'Bug Reports',
+			},
 		},
 	},
 };

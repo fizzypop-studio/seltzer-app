@@ -1,4 +1,5 @@
 import { DataCard, Drawer, Grid, Typography } from 'components';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '@mui/material/styles';
 import {
 	Person,
@@ -7,14 +8,22 @@ import {
 	BugReport,
 } from '@mui/icons-material';
 
+import { useSelector } from 'react-redux';
+import { ReduxUser } from 'types/Redux';
+
 import { colors } from 'theme';
 import * as S from './Dashboard.styles';
 
 export const Dashboard = () => {
+	const { value: user } = useSelector((state: ReduxUser) => state.user);
 	const theme = useTheme();
+	const { t } = useTranslation();
+
 	return (
 		<Drawer currentRoute="/dashboard">
-			<Typography variant="h5">Hello there!</Typography>
+			<Typography variant="h5">{`${t('pages.dashboard.welcome')}, ${
+				user?.firstName
+			} ${user?.lastName}`}</Typography>
 			<S.DataWrapper>
 				<Grid
 					container
@@ -25,7 +34,7 @@ export const Dashboard = () => {
 						<DataCard
 							icon={<QueryStats />}
 							data={10000}
-							title="Weekly Sales"
+							title={t('pages.dashboard.weeklySales')}
 							colors={[
 								theme.palette.secondary.light,
 								theme.palette.secondary.main,
@@ -36,7 +45,7 @@ export const Dashboard = () => {
 						<DataCard
 							icon={<Person />}
 							data={175000}
-							title="New Users"
+							title={t('pages.dashboard.newUsers')}
 							colors={[
 								theme.palette.primary.light,
 								theme.palette.primary.main,
@@ -47,7 +56,7 @@ export const Dashboard = () => {
 						<DataCard
 							icon={<ShoppingCart />}
 							data={2000000}
-							title="Item Orders"
+							title={t('pages.dashboard.itemOrders')}
 							colors={[
 								colors.tertiary.light,
 								colors.tertiary.main,
@@ -58,7 +67,7 @@ export const Dashboard = () => {
 						<DataCard
 							icon={<BugReport />}
 							data={1000}
-							title="Bug Reports"
+							title={t('pages.dashboard.bugReports')}
 							colors={[colors.green.light, colors.green.main]}
 						/>
 					</Grid>

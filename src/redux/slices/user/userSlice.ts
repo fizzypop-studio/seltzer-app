@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const user = {
 	id: 'id-123456',
 	firstName: 'Michael',
-	lasName: 'Scarn',
+	lastName: 'Scarn',
 	email: 'michaelscarn@test.com',
 };
 

@@ -302,9 +302,9 @@ export const Drawer = ({ children, currentRoute }: DrawerProps) => {
 				{drawerOpen && (
 					<S.DrawerFooter>
 						<IconActionCard
-							content="Upgrade to PRO for more users"
+							content={t('general.goPro')}
 							icon={<ElectricBolt />}
-							buttonText="Upgrade"
+							buttonText={t('general.upgrade')}
 							onClick={handleUpgrade}
 						/>
 					</S.DrawerFooter>
@@ -323,9 +323,9 @@ export const Drawer = ({ children, currentRoute }: DrawerProps) => {
 			<ActionModal
 				open={logoutModalOpen}
 				onClose={handleCloseLogoutModal}
-				title="Logout User"
-				content="Are you sure you want to log out?"
-				actionText="Logout"
+				title={t('auth.logoutUser')}
+				content={t('auth.areYouSureLogout')}
+				actionText={t('auth.logout')}
 				onActionClick={handleLogout}
 				onRequestClose={handleCloseLogoutModal}
 			/>
