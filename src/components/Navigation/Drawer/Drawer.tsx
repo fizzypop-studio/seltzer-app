@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
+import { useTranslation } from 'react-i18next';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleDrawer } from 'redux/slices/navigation/navigationSlice';
 import { ReduxNavigation } from 'types/Redux';
 
-import Badge from '@mui/material/Badge';
-import List from '@mui/material/List';
-import CssBaseline from '@mui/material/CssBaseline';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Avatar from '@mui/material/Avatar';
+import {
+	Avatar,
+	Badge,
+	List,
+	CssBaseline,
+	MenuItem,
+	Menu,
+	ListItem,
+	ListItemButton,
+	ListItemText,
+	ListItemIcon,
+} from '@mui/material';
 import {
 	AccountCircle,
 	ChevronLeft,
@@ -34,9 +37,10 @@ import {
 	Toolbar,
 	IconActionCard,
 } from 'components';
+
 import { useWindowDimensions } from 'hooks/use-window-dimensions';
 import { useRouter } from 'hooks/use-router';
-import { useTranslation } from 'react-i18next';
+
 import * as S from './Drawer.styles';
 
 type DrawerProps = {
