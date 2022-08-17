@@ -43,6 +43,22 @@ const Router = () => {
 							</RequireAuth>
 						}
 					/>
+					<Route
+						path="/dashboard/team"
+						element={
+							<RequireAuth>
+								<Dashboard />
+							</RequireAuth>
+						}
+					/>
+					<Route
+						path="/dashboard/account"
+						element={
+							<RequireAuth>
+								<Dashboard />
+							</RequireAuth>
+						}
+					/>
 
 					<Route path="/logout" element={<Logout />} />
 					<Route path="/" element={<Navigate to="/login" />} />

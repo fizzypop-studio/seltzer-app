@@ -32,6 +32,7 @@ import {
 	IconActionCard,
 } from 'components';
 import { useWindowDimensions } from 'hooks/use-window-dimensions';
+import { useRouter } from 'hooks/use-router';
 import { useTranslation } from 'react-i18next';
 import * as S from './Drawer.styles';
 
@@ -49,22 +50,9 @@ export const Drawer = ({ children }: DrawerProps) => {
 	const theme = useTheme();
 	const { isMobile } = useWindowDimensions();
 	const { t } = useTranslation();
+	const { drawerRoutes } = useRouter();
 
 	const notificationCount = 17;
-
-	// Change this to update navigation items for the sidebar
-	const navigationItems = [
-		{
-			label: t('navigation.pages.dashboard'),
-			icon: <Dashboard />,
-			to: '/dashboard',
-		},
-		{
-			label: t('navigation.pages.team'),
-			icon: <Group />,
-			to: '/team',
-		},
-	];
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -127,7 +115,7 @@ export const Drawer = ({ children }: DrawerProps) => {
 			open={isMenuOpen}
 			onClose={handleMenuClose}
 		>
-			<MenuItem onClick={handleMenuClose}>
+			<MenuItem onClick={() => navigate('/dashboard/account')}>
 				{t('navigation.myAccount')}
 			</MenuItem>
 			<MenuItem onClick={handleOpenLogoutModal}>
@@ -263,7 +251,7 @@ export const Drawer = ({ children }: DrawerProps) => {
 					/>
 				</S.DrawerHeader>
 				<List>
-					{navigationItems.map((item) => (
+					{drawerRoutes.map((item) => (
 						<ListItem
 							key={item.label}
 							disablePadding
@@ -275,6 +263,7 @@ export const Drawer = ({ children }: DrawerProps) => {
 									justifyContent: open ? 'initial' : 'center',
 									px: 2.5,
 								}}
+								onClick={() => navigate(item.to)}
 							>
 								<ListItemIcon
 									sx={{
