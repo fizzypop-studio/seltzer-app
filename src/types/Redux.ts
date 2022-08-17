@@ -7,3 +7,9 @@ export type ReduxUser = {
 		error: string;
 	};
 };
+
+export type ReduxNavigation = {
+	navigation: {
+		drawerOpen: boolean;
+	};
+};

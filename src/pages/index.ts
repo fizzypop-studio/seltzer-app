@@ -1,18 +1,20 @@
 /*************
 Authentication Pages
 *************/
-export { Login } from './auth/Login';
-export { SignUp } from './auth/SignUp';
-export { ForgotPassword } from './auth/ForgotPassword';
-export { ResetPassword } from './auth/ResetPassword';
-export { Logout } from './auth/Logout';
+export { Login } from 'pages/auth/Login';
+export { SignUp } from 'pages/auth/SignUp';
+export { ForgotPassword } from 'pages/auth/ForgotPassword';
+export { ResetPassword } from 'pages/auth/ResetPassword';
+export { Logout } from 'pages/auth/Logout';
 
 /*************
 Main Pages
 *************/
-export { Dashboard } from './main/Dashboard';
+export { Account } from 'pages/main/Account';
+export { Dashboard } from 'pages/main/Dashboard';
+export { Team } from 'pages/main/Team';
 
 /*************
 Error Pages
 *************/
-export { ErrorPage } from './error/ErrorPage';
+export { ErrorPage } from 'pages/error/ErrorPage';

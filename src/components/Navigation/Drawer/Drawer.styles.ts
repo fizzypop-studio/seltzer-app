@@ -44,6 +44,12 @@ export const Wrapper = styled(Box)`
 	.drawer-content {
 		background-color: #fff;
 	}
+
+	.active-item {
+		border-right: 0.3rem solid
+			${({ theme }) => theme.palette.secondary.light};
+		background-color: ${({ theme }) => theme.palette.background.default};
+	}
 `;
 
 export const DrawerHeader = styled('div')(({ theme }) => ({

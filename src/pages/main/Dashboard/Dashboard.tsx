@@ -1,12 +1,9 @@
 import { Drawer, Typography } from 'components';
-import * as S from './Dashboard.styles';
 
-const Dashboard = () => {
+export const Dashboard = () => {
 	return (
-		<Drawer>
+		<Drawer currentRoute="/dashboard">
 			<Typography variant="h5">Hello there!</Typography>
 		</Drawer>
 	);
 };
-
-export default Dashboard;

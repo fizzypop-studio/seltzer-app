@@ -15,7 +15,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
-import { Google, Apple, Facebook } from '@mui/icons-material';
+import { Google, Twitter, Facebook } from '@mui/icons-material';
 
 import { EMAIL_REGEX } from 'helpers/regex';
 
@@ -29,7 +29,7 @@ type SignUpFormValues = {
 	confirmPassword: string;
 };
 
-const SignUp = () => {
+export const SignUp = () => {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 
@@ -169,9 +169,9 @@ const SignUp = () => {
 								fullWidth
 							/>
 							<Button
-								text={t('auth.social.apple')}
+								text={t('auth.social.twitter')}
 								variant="outlined"
-								startIcon={<Apple />}
+								startIcon={<Twitter />}
 								fullWidth
 							/>
 							<Button
@@ -199,5 +199,3 @@ const SignUp = () => {
 		</S.Wrapper>
 	);
 };
-
-export default SignUp;

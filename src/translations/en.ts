@@ -37,7 +37,7 @@ export const en = {
 			signInWith: 'Or Sign in with',
 			signUpWith: 'Or Sign up with',
 			social: {
-				apple: 'Apple ID',
+				twitter: 'Twitter',
 				facebook: 'Facebook',
 				google: 'Google',
 			},

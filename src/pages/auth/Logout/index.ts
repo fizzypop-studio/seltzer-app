@@ -1,1 +1,1 @@
-export { default as Logout } from './Logout';
+export { Logout } from './Logout';

@@ -21,7 +21,7 @@ type ForgotPasswordFormValues = {
 	email: string;
 };
 
-const ForgotPassword = () => {
+export const ForgotPassword = () => {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 
@@ -97,5 +97,3 @@ const ForgotPassword = () => {
 		</S.Wrapper>
 	);
 };
-
-export default ForgotPassword;

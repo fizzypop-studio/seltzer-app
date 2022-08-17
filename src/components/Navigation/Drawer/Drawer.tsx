@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleDrawer } from 'redux/slices/navigation/navigationSlice';
+import { ReduxNavigation } from 'types/Redux';
+
 import Badge from '@mui/material/Badge';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -15,9 +20,7 @@ import {
 	AccountCircle,
 	ChevronLeft,
 	ChevronRight,
-	Dashboard,
 	ElectricBolt,
-	Group,
 	Search,
 	Menu as MenuIcon,
 	More,
@@ -38,14 +41,18 @@ import * as S from './Drawer.styles';
 
 type DrawerProps = {
 	children: React.ReactNode;
+	currentRoute: string;
 };
 
-export const Drawer = ({ children }: DrawerProps) => {
-	const [open, setOpen] = useState<boolean>(false);
+export const Drawer = ({ children, currentRoute }: DrawerProps) => {
 	const [logoutModalOpen, setLogoutModalOpen] = useState<boolean>(false);
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
 		useState<null | HTMLElement>(null);
+	const { drawerOpen } = useSelector(
+		(state: ReduxNavigation) => state.navigation
+	);
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const theme = useTheme();
 	const { isMobile } = useWindowDimensions();
@@ -55,11 +62,11 @@ export const Drawer = ({ children }: DrawerProps) => {
 	const notificationCount = 17;
 
 	const handleDrawerOpen = () => {
-		setOpen(true);
+		dispatch(toggleDrawer(true));
 	};
 
 	const handleDrawerClose = () => {
-		setOpen(false);
+		dispatch(toggleDrawer(false));
 	};
 
 	const isMenuOpen = Boolean(anchorEl);
@@ -171,7 +178,7 @@ export const Drawer = ({ children }: DrawerProps) => {
 	return (
 		<S.Wrapper sx={{ display: 'flex' }}>
 			<CssBaseline />
-			<S.AppBar position="fixed" open={open} elevation={0}>
+			<S.AppBar position="fixed" open={drawerOpen} elevation={0}>
 				<Toolbar>
 					<IconButton
 						icon={<MenuIcon />}
@@ -180,7 +187,7 @@ export const Drawer = ({ children }: DrawerProps) => {
 						edge="start"
 						sx={{
 							marginRight: 5,
-							...(open && { display: 'none' }),
+							...(drawerOpen && { display: 'none' }),
 						}}
 					/>
 					<Typography variant="h6" noWrap>
@@ -236,7 +243,7 @@ export const Drawer = ({ children }: DrawerProps) => {
 					keepMounted: isMobile,
 				}}
 				variant={isMobile ? 'temporary' : 'permanent'}
-				open={open}
+				open={drawerOpen}
 			>
 				<S.DrawerHeader>
 					<IconButton
@@ -256,11 +263,16 @@ export const Drawer = ({ children }: DrawerProps) => {
 							key={item.label}
 							disablePadding
 							sx={{ display: 'block' }}
+							className={`${
+								currentRoute === item.to ? 'active-item' : ''
+							} `}
 						>
 							<ListItemButton
 								sx={{
 									minHeight: 48,
-									justifyContent: open ? 'initial' : 'center',
+									justifyContent: drawerOpen
+										? 'initial'
+										: 'center',
 									px: 2.5,
 								}}
 								onClick={() => navigate(item.to)}
@@ -268,7 +280,7 @@ export const Drawer = ({ children }: DrawerProps) => {
 								<ListItemIcon
 									sx={{
 										minWidth: 0,
-										mr: open ? 3 : 'auto',
+										mr: drawerOpen ? 3 : 'auto',
 										justifyContent: 'center',
 									}}
 								>
@@ -276,13 +288,13 @@ export const Drawer = ({ children }: DrawerProps) => {
 								</ListItemIcon>
 								<ListItemText
 									primary={item.label}
-									sx={{ opacity: open ? 1 : 0 }}
+									sx={{ opacity: drawerOpen ? 1 : 0 }}
 								/>
 							</ListItemButton>
 						</ListItem>
 					))}
 				</List>
-				{open && (
+				{drawerOpen && (
 					<S.DrawerFooter>
 						<IconActionCard
 							content="Upgrade to PRO for more users"

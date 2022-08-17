@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { RequireAuth } from './navigation/RequireAuth';
 
 import {
+	Account,
 	Login,
 	SignUp,
 	ForgotPassword,
@@ -10,6 +11,7 @@ import {
 	Logout,
 	Dashboard,
 	ErrorPage,
+	Team,
 } from './pages';
 
 import { ReduxUser } from './types/Redux';
@@ -47,7 +49,7 @@ const Router = () => {
 						path="/dashboard/team"
 						element={
 							<RequireAuth>
-								<Dashboard />
+								<Team />
 							</RequireAuth>
 						}
 					/>
@@ -55,7 +57,7 @@ const Router = () => {
 						path="/dashboard/account"
 						element={
 							<RequireAuth>
-								<Dashboard />
+								<Account />
 							</RequireAuth>
 						}
 					/>
