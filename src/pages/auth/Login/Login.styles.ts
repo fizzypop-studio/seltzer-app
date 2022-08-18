@@ -4,11 +4,7 @@ export const Wrapper = styled('div')`
 	position: fixed;
 	width: 100%;
 	overflow: scroll;
-	background-image: url('https://bit.ly/3JJHNlG');
-	background-position: center center;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-size: cover;
+	background-color: ${({ theme }) => theme.palette.secondary.light};
 
 	.container {
 		display: flex;
@@ -46,10 +42,6 @@ export const HeaderActionWrapper = styled('div')`
 	justify-content: flex-end;
 	align-items: center;
 	width: 75%;
-
-	.sign-up-button {
-		color: #fff;
-	}
 
 	.request-button {
 		width: 12rem;
