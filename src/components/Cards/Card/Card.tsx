@@ -1,4 +1,3 @@
-/* eslint-disable import/named */
 import * as S from './Card.styles';
 import { CardProps as MUICardProps } from '@mui/material/Card';
 

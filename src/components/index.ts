@@ -14,6 +14,7 @@ export { IconButton } from './Buttons/IconButton';
 Cards
 *************/
 export { Card } from './Cards/Card';
+export { ChartCard } from './Cards/ChartCard';
 export { DataCard } from './Cards/DataCard';
 export { IconActionCard } from './Cards/IconActionCard';
 
@@ -23,6 +24,7 @@ Layout
 export { Box } from './Layout/Box';
 export { Container } from './Layout/Container';
 export { Grid } from './Layout/Grid';
+export { PageWrapper } from './Layout/PageWrapper';
 export { Paper } from './Layout/Paper';
 export { Stack } from './Layout/Stack';
 
@@ -46,3 +48,13 @@ export { Toolbar } from './Navigation/Drawer/Toolbar';
 Modals
 *************/
 export { ActionModal } from './Modals/ActionModal';
+
+/*************
+Charts
+*************/
+export { AreaChart } from './Charts/AreaChart';
+
+/*************
+SEO
+*************/
+export { Helmet } from './SEO/Helmet';

@@ -1,4 +1,4 @@
-/* eslint-disable import/named */
+
 import { useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Button } from 'components';

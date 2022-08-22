@@ -1,4 +1,3 @@
-/* eslint-disable import/named */
 import { useTheme } from '@mui/material/styles';
 import { Typography } from 'components';
 import { CardProps as MUICardProps } from '@mui/material/Card';

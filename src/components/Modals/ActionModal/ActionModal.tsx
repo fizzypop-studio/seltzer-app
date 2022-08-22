@@ -1,4 +1,3 @@
-/* eslint-disable import/named */
 import { forwardRef, useRef } from 'react';
 import { Box, Button, Typography } from 'components';
 import { DialogProps as MUIModalProps } from '@mui/material/Dialog';

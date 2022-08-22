@@ -1,4 +1,3 @@
-/* eslint-disable import/named */
 import * as S from './Paper.styles';
 import { PaperProps as MUIPaperProps } from '@mui/material/Paper';
 

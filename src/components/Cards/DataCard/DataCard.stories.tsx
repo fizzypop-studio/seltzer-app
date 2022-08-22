@@ -1,4 +1,3 @@
-/* eslint-disable import/named */
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { DataCard } from './DataCard';
 import { ElectricBolt } from '@mui/icons-material';

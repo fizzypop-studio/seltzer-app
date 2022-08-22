@@ -41,10 +41,6 @@ const closedMixin = (theme: Theme): CSSObject => ({
 export const Wrapper = styled(Box)`
 	padding: 0;
 
-	.drawer-content {
-		background-color: #fff;
-	}
-
 	.active-item {
 		border-right: 0.3rem solid
 			${({ theme }) => theme.palette.secondary.light};

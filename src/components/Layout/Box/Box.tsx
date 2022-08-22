@@ -1,4 +1,3 @@
-/* eslint-disable import/named */
 import * as S from './Box.styles';
 import { BoxProps as MUIBoxProps } from '@mui/material/Box';
 

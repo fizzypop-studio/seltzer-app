@@ -1,4 +1,3 @@
-/* eslint-disable import/named */
 import * as S from './Link.styles';
 import { LinkProps as MUILinkProps } from '@mui/material/Link';
 

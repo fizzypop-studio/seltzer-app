@@ -1,4 +1,3 @@
-/* eslint-disable import/named */
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { IconButton } from './IconButton';
 import { Delete } from '@mui/icons-material';

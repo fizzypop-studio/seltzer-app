@@ -1,4 +1,5 @@
 import React from 'react';
+import { HelmetProvider } from 'react-helmet-async';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@mui/material/styles';
@@ -11,11 +12,13 @@ import store from './redux/store';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-	<React.StrictMode>
-		<ThemeProvider theme={theme}>
-			<Provider store={store}>
-				<Router />
-			</Provider>
-		</ThemeProvider>
-	</React.StrictMode>
+	<HelmetProvider>
+		<React.StrictMode>
+			<ThemeProvider theme={theme}>
+				<Provider store={store}>
+					<Router />
+				</Provider>
+			</ThemeProvider>
+		</React.StrictMode>
+	</HelmetProvider>
 );

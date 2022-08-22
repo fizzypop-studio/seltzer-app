@@ -31,4 +31,9 @@ export const colors = {
 		main: '#76877D',
 		dark: '#2c332f',
 	},
+	gray: {
+		light: '#ececec',
+		main: '#A9A9A9',
+		dark: '#818589',
+	},
 };

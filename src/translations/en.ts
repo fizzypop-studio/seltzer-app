@@ -49,6 +49,7 @@ export const en = {
 			logout: 'Logout',
 			logoutUser: 'Logout User',
 			areYouSureLogout: 'Are you sure you want to log out?',
+			seo: 'A Fresh React Starter App',
 		},
 		general: {
 			copyright: 'Copyright @fizzypopstudio',
@@ -77,6 +78,12 @@ export const en = {
 				newUsers: 'New Users',
 				itemOrders: 'Item Orders',
 				bugReports: 'Bug Reports',
+			},
+			team: {
+				title: 'Team',
+			},
+			account: {
+				title: 'My Account',
 			},
 		},
 	},

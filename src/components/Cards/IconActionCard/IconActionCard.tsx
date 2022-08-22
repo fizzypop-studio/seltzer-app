@@ -1,4 +1,3 @@
-/* eslint-disable import/named */
 import * as S from './IconActionCard.styles';
 import { CardProps as MUICardProps } from '@mui/material/Card';
 import { Button, Typography } from 'components';

@@ -3,6 +3,7 @@ import {
 	Box,
 	Button,
 	Container,
+	Helmet,
 	Link,
 	Stack,
 	TextDivider,
@@ -53,6 +54,7 @@ export const Login = () => {
 
 	return (
 		<S.Wrapper>
+			<Helmet title={`Seltzer | ${t('auth.seo')}`} link="/login" />
 			<S.HeaderWrapper>
 				<S.LogoWrapper>
 					<Typography variant="h5">SELTZER</Typography>

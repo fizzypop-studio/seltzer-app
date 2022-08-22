@@ -1,4 +1,3 @@
-/* eslint-disable import/named */
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Button } from 'components';
 import { Stack } from './Stack';

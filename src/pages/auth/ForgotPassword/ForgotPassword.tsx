@@ -3,6 +3,7 @@ import {
 	Box,
 	Button,
 	Container,
+	Helmet,
 	Link,
 	TextInput,
 	Typography,
@@ -47,6 +48,7 @@ export const ForgotPassword = () => {
 
 	return (
 		<S.Wrapper>
+			<Helmet title={`Seltzer | ${t('auth.seo')}`} link="/login" />
 			<S.HeaderWrapper>
 				<S.LogoWrapper>
 					<Typography variant="h5">SELTZER</Typography>

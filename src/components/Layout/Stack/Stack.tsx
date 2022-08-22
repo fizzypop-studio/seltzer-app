@@ -1,4 +1,3 @@
-/* eslint-disable import/named */
 import * as S from './Stack.styles';
 import { StackProps as MUIStackProps } from '@mui/material/Stack';
 
