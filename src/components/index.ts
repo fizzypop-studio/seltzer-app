@@ -53,6 +53,7 @@ export { ActionModal } from './Modals/ActionModal';
 Charts
 *************/
 export { AreaChart } from './Charts/AreaChart';
+export { PieChart } from './Charts/PieChart';
 
 /*************
 SEO

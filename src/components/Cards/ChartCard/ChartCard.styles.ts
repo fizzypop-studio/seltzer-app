@@ -4,6 +4,7 @@ import { colors } from 'theme';
 
 export const StyledChartCard = styled(Card)`
 	padding: 2rem;
+	height: 33rem;
 `;
 
 export const TitleWrapper = styled('div')`
