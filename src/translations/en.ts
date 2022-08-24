@@ -80,7 +80,7 @@ export const en = {
 				bugReports: 'Bug Reports',
 			},
 			team: {
-				title: 'Team',
+				title: 'Team Members',
 				addMember: 'Add Member',
 			},
 			account: {

@@ -9,6 +9,7 @@
     "@hookform/resolvers": "^2.9.7",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.3",
+    "@mui/utils": "^5.9.3",
     "@reduxjs/toolkit": "^1.8.1",
     "@storybook/react": "^6.5.10",
     "@storybook/testing-library": "^0.0.13",

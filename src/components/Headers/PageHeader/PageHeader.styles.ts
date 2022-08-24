@@ -7,6 +7,7 @@ export const Wrapper = styled('div')`
 	justify-content: space-between;
 	padding-bottom: 1rem;
 	border-bottom: 1px solid ${colors.gray.light};
+	margin-bottom: 1.5rem;
 `;
 
 export const TitleWrapper = styled('div')``;

@@ -61,6 +61,11 @@ export { AreaChart } from './Charts/AreaChart';
 export { PieChart } from './Charts/PieChart';
 
 /*************
+Tables
+*************/
+export { Table } from './Tables/Table';
+
+/*************
 SEO
 *************/
 export { Helmet } from './SEO/Helmet';
