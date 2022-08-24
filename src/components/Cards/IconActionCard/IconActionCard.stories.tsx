@@ -1,4 +1,3 @@
-
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { IconActionCard } from './IconActionCard';
 import { ElectricBolt } from '@mui/icons-material';

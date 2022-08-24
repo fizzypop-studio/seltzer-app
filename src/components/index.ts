@@ -19,6 +19,11 @@ export { DataCard } from './Cards/DataCard';
 export { IconActionCard } from './Cards/IconActionCard';
 
 /*************
+Headers
+*************/
+export { PageHeader } from './Headers/PageHeader';
+
+/*************
 Layout
 *************/
 export { Box } from './Layout/Box';

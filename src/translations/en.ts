@@ -81,6 +81,7 @@ export const en = {
 			},
 			team: {
 				title: 'Team',
+				addMember: 'Add Member',
 			},
 			account: {
 				title: 'My Account',

@@ -1,9 +1,14 @@
-import { Drawer, Helmet, Typography } from 'components';
+import { Drawer, Helmet, PageHeader } from 'components';
 import { useTranslation } from 'react-i18next';
+import { Add } from '@mui/icons-material';
 import * as S from './Team.styles';
 
 export const Team = () => {
 	const { t } = useTranslation();
+
+	const handleAddMember = () => {
+		console.log('Add Team Member');
+	};
 
 	return (
 		<Drawer currentRoute="/dashboard/team">
@@ -12,7 +17,12 @@ export const Team = () => {
 				link="/dashboard/team"
 				addPostfixTitle
 			/>
-			<Typography variant="h5">Team</Typography>
+			<PageHeader
+				title={t('pages.team.title')}
+				actionText={t('pages.team.addMember')}
+				actionClick={handleAddMember}
+				actionIcon={<Add />}
+			/>
 		</Drawer>
 	);
 };
