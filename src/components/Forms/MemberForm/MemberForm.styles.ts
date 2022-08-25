@@ -5,6 +5,14 @@ export const Form = styled('form')`
 	margin-top: 2rem;
 `;
 
+export const AvatarWrapper = styled('div')`
+	display: flex;
+	align-item: center;
+	justify-content: center;
+	width: 100%;
+	margin-bottom: 2rem;
+`;
+
 export const ActionWrapper = styled('div')`
 	display: flex;
 	align-items: center;

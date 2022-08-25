@@ -63,6 +63,8 @@ export const en = {
 			},
 			upgrade: 'Upgrade',
 			goPro: 'Upgrade to PRO for more users',
+			uploadAvatar: 'Upload Avatar',
+			dropHere: 'Drop Here',
 		},
 		navigation: {
 			pages: {

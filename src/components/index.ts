@@ -36,6 +36,7 @@ export { Stack } from './Layout/Stack';
 /*************
 Inputs
 *************/
+export { AvatarUpload } from './Inputs/AvatarUpload';
 export { TextInput } from './Inputs/TextInput';
 
 /*************

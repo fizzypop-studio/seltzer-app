@@ -1,5 +1,5 @@
-import { Button, Stack, TextInput } from 'components';
-
+import { useState } from 'react';
+import { AvatarUpload, Button, Stack, TextInput } from 'components';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -20,6 +20,8 @@ type MemberFormValues = {
 };
 
 export const MemberForm = ({ handleCancel }: MemberFormProps) => {
+	const [avatar, setAvatar] = useState('');
+	const [file, setFile] = useState(null);
 	const { t } = useTranslation();
 
 	const schema = yup
@@ -44,8 +46,19 @@ export const MemberForm = ({ handleCancel }: MemberFormProps) => {
 		console.log({ data });
 	};
 
+	const handleSetAvatarFile = (avatarFile: any) => {
+		setFile(avatarFile);
+	};
+
 	return (
 		<S.Form onSubmit={handleSubmit(onSubmit)}>
+			<S.AvatarWrapper>
+				<AvatarUpload
+					avatar={avatar}
+					setAvatar={setAvatar}
+					setFile={handleSetAvatarFile}
+				/>
+			</S.AvatarWrapper>
 			<Stack
 				direction={{ xs: 'column', sm: 'row' }}
 				spacing={{ xs: 0, sm: 1.5 }}
