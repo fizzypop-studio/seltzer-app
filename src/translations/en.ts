@@ -23,6 +23,10 @@ export const en = {
 				valid: 'Please enter a valid email',
 				required: 'Email is required',
 			},
+			role: {
+				label: 'Member Role (ex. Sales)',
+				required: 'Role is required',
+			},
 			password: {
 				label: 'Password',
 				required: 'Password is required',
@@ -82,6 +86,8 @@ export const en = {
 			team: {
 				title: 'Team Members',
 				addMember: 'Add Member',
+				addMemberDesc:
+					'Fill out the form below to create a new team member',
 			},
 			account: {
 				title: 'My Account',

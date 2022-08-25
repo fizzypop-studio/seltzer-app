@@ -1,5 +1,5 @@
 import { forwardRef, useRef } from 'react';
-import { Box, Button, Typography } from 'components';
+import { Button, Typography } from 'components';
 import { DialogProps as MUIModalProps } from '@mui/material/Dialog';
 import * as S from './ActionModal.styles';
 

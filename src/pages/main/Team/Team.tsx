@@ -1,21 +1,32 @@
-import { Drawer, Helmet, PageHeader, Table } from 'components';
+import { useState } from 'react';
+import {
+	Drawer,
+	Helmet,
+	MemberForm,
+	Modal,
+	PageHeader,
+	Table,
+} from 'components';
 import { useTranslation } from 'react-i18next';
 import { Add } from '@mui/icons-material';
 
+type Column = {
+	id: 'name' | 'role' | 'email';
+	label: string;
+	minWidth?: number;
+	align?: 'right';
+	format?: (value: number) => string;
+};
+
+type Data = {
+	name: string;
+	role: string;
+	email: string;
+};
+
 export const Team = () => {
+	const [showMemberModal, setShowMemberModal] = useState(false);
 	const { t } = useTranslation();
-
-	const handleAddMember = () => {
-		console.log('Add Team Member');
-	};
-
-	type Column = {
-		id: 'name' | 'role' | 'email';
-		label: string;
-		minWidth?: number;
-		align?: 'right';
-		format?: (value: number) => string;
-	};
 
 	const columns: Column[] = [
 		{ id: 'name', label: 'Name', minWidth: 170 },
@@ -23,15 +34,9 @@ export const Team = () => {
 		{ id: 'email', label: 'Email', minWidth: 150 },
 	];
 
-	type Data = {
-		name: string;
-		role: string;
-		email: string;
-	};
-
-	function createData(name: string, role: string, email: string): Data {
+	const createData = (name: string, role: string, email: string): Data => {
 		return { name, role, email };
-	}
+	};
 
 	const rows = [
 		createData(
@@ -54,6 +59,14 @@ export const Team = () => {
 		createData('Creed Bratton', 'Unknown', 'creed@email.com'),
 	];
 
+	const handleShowMemberModal = () => {
+		setShowMemberModal(true);
+	};
+
+	const handleCloseMemberModal = () => {
+		setShowMemberModal(false);
+	};
+
 	return (
 		<Drawer currentRoute="/dashboard/team">
 			<Helmet
@@ -64,10 +77,19 @@ export const Team = () => {
 			<PageHeader
 				title={t('pages.team.title')}
 				actionText={t('pages.team.addMember')}
-				actionClick={handleAddMember}
+				actionClick={handleShowMemberModal}
 				actionIcon={<Add />}
 			/>
 			<Table columns={columns} rows={rows} />
+			<Modal
+				open={showMemberModal}
+				onClose={handleCloseMemberModal}
+				title="Add Member"
+				content="Fill out the form below to create a new team member"
+				onRequestClose={handleCloseMemberModal}
+			>
+				<MemberForm handleCancel={handleCloseMemberModal} />
+			</Modal>
 		</Drawer>
 	);
 };

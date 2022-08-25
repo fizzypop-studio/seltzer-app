@@ -53,6 +53,7 @@ export { Toolbar } from './Navigation/Drawer/Toolbar';
 Modals
 *************/
 export { ActionModal } from './Modals/ActionModal';
+export { Modal } from './Modals/Modal';
 
 /*************
 Charts
@@ -64,6 +65,11 @@ export { PieChart } from './Charts/PieChart';
 Tables
 *************/
 export { Table } from './Tables/Table';
+
+/*************
+Forms
+*************/
+export { MemberForm } from './Forms/MemberForm';
 
 /*************
 SEO
