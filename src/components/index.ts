@@ -70,7 +70,7 @@ export { Table } from './Tables/Table';
 /*************
 Forms
 *************/
-export { MemberForm } from './Forms/MemberForm';
+export { ContactForm } from './Forms/ContactForm';
 
 /*************
 SEO

@@ -6,20 +6,20 @@ import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
 import { EMAIL_REGEX } from 'helpers/regex';
-import * as S from './MemberForm.styles';
+import * as S from './ContactForm.styles';
 
-type MemberFormProps = {
+type ContactFormProps = {
 	handleCancel: () => void;
 };
 
-type MemberFormValues = {
+type ContactFormValues = {
 	firstName: string;
 	lastName: string;
 	email: string;
 	role: string;
 };
 
-export const MemberForm = ({ handleCancel }: MemberFormProps) => {
+export const ContactForm = ({ handleCancel }: ContactFormProps) => {
 	const [avatar, setAvatar] = useState('');
 	const [file, setFile] = useState(null);
 	const { t } = useTranslation();
@@ -40,9 +40,9 @@ export const MemberForm = ({ handleCancel }: MemberFormProps) => {
 		handleSubmit,
 		control,
 		formState: { errors },
-	} = useForm<MemberFormValues>({ resolver: yupResolver(schema) });
+	} = useForm<ContactFormValues>({ resolver: yupResolver(schema) });
 
-	const onSubmit = (data: MemberFormValues) => {
+	const onSubmit = (data: ContactFormValues) => {
 		console.log({ data });
 	};
 
@@ -103,7 +103,7 @@ export const MemberForm = ({ handleCancel }: MemberFormProps) => {
 			<S.ActionWrapper>
 				<Button variant="text" text="Cancel" onClick={handleCancel} />
 				<Button
-					text={t('pages.team.addMember')}
+					text={t('pages.contacts.addContact')}
 					type="submit"
 					className="submit-button"
 				/>

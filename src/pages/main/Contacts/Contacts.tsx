@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
 	Drawer,
 	Helmet,
-	MemberForm,
+	ContactForm,
 	Modal,
 	PageHeader,
 	Table,
@@ -24,8 +24,8 @@ type Data = {
 	email: string;
 };
 
-export const Team = () => {
-	const [showMemberModal, setShowMemberModal] = useState(false);
+export const Contacts = () => {
+	const [showContactModal, setShowContactModal] = useState(false);
 	const { t } = useTranslation();
 
 	const columns: Column[] = [
@@ -59,36 +59,36 @@ export const Team = () => {
 		createData('Creed Bratton', 'Unknown', 'creed@email.com'),
 	];
 
-	const handleShowMemberModal = () => {
-		setShowMemberModal(true);
+	const handleShowContactModal = () => {
+		setShowContactModal(true);
 	};
 
-	const handleCloseMemberModal = () => {
-		setShowMemberModal(false);
+	const handleCloseContactModal = () => {
+		setShowContactModal(false);
 	};
 
 	return (
-		<Drawer currentRoute="/dashboard/team">
+		<Drawer currentRoute="/dashboard/contatcs">
 			<Helmet
-				title={t('pages.team.title')}
-				link="/dashboard/team"
+				title={t('pages.contacts.title')}
+				link="/dashboard/contacts"
 				addPostfixTitle
 			/>
 			<PageHeader
-				title={t('pages.team.title')}
-				actionText={t('pages.team.addMember')}
-				actionClick={handleShowMemberModal}
+				title={t('pages.contacts.title')}
+				actionText={t('pages.contacts.addContact')}
+				actionClick={handleShowContactModal}
 				actionIcon={<Add />}
 			/>
 			<Table columns={columns} rows={rows} />
 			<Modal
-				open={showMemberModal}
-				onClose={handleCloseMemberModal}
-				title="Add Member"
-				content="Fill out the form below to create a new team member"
-				onRequestClose={handleCloseMemberModal}
+				open={showContactModal}
+				onClose={handleCloseContactModal}
+				title="Add Contact"
+				content="Fill out the form below to create a new contact"
+				onRequestClose={handleCloseContactModal}
 			>
-				<MemberForm handleCancel={handleCloseMemberModal} />
+				<ContactForm handleCancel={handleCloseContactModal} />
 			</Modal>
 		</Drawer>
 	);

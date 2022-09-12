@@ -11,7 +11,7 @@ import {
 	Logout,
 	Dashboard,
 	ErrorPage,
-	Team,
+	Contacts,
 } from './pages';
 
 import { ReduxUser } from './types/Redux';
@@ -46,10 +46,10 @@ const Router = () => {
 						}
 					/>
 					<Route
-						path="/dashboard/team"
+						path="/dashboard/contacts"
 						element={
 							<RequireAuth>
-								<Team />
+								<Contacts />
 							</RequireAuth>
 						}
 					/>

@@ -24,7 +24,7 @@ export const en = {
 				required: 'Email is required',
 			},
 			role: {
-				label: 'Member Role (ex. Sales)',
+				label: 'Contact Role (ex. Sales)',
 				required: 'Role is required',
 			},
 			password: {
@@ -69,7 +69,7 @@ export const en = {
 		navigation: {
 			pages: {
 				dashboard: 'Dashboard',
-				team: 'Team',
+				contacts: 'Contacts',
 				notifications: 'Notifications',
 				profile: 'Profile',
 				logout: 'Logout',
@@ -85,11 +85,11 @@ export const en = {
 				itemOrders: 'Item Orders',
 				bugReports: 'Bug Reports',
 			},
-			team: {
-				title: 'Team Members',
-				addMember: 'Add Member',
-				addMemberDesc:
-					'Fill out the form below to create a new team member',
+			contacts: {
+				title: 'Contacts',
+				addContact: 'Add Contact',
+				addContactDesc:
+					'Fill out the form below to create a new contact',
 			},
 			account: {
 				title: 'My Account',

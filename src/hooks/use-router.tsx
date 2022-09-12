@@ -11,9 +11,9 @@ export const useRouter = () => {
 			to: '/dashboard',
 		},
 		{
-			label: t('navigation.pages.team'),
+			label: t('navigation.pages.contacts'),
 			icon: <Group />,
-			to: '/dashboard/team',
+			to: '/dashboard/contacts',
 		},
 	];
 
