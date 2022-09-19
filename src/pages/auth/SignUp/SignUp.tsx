@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
 	Box,
@@ -10,6 +11,13 @@ import {
 	TextInput,
 	Typography,
 } from 'components';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from 'redux/store';
+import {
+	signUpUser,
+	resetErrorState,
+} from 'redux/slices/sessions/sessionSlice';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -31,6 +39,10 @@ type SignUpFormValues = {
 };
 
 export const SignUp = () => {
+	const errorMessages = useSelector(
+		(state: RootState) => state.session.errorMessages
+	);
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 
@@ -51,11 +63,30 @@ export const SignUp = () => {
 		handleSubmit,
 		control,
 		formState: { errors },
+		setError,
+		clearErrors,
 	} = useForm<SignUpFormValues>({ resolver: yupResolver(schema) });
 
-	function onSubmit(data: SignUpFormValues) {
-		console.log({ data });
-		navigate('/dashboard');
+	useEffect(() => {
+		clearErrors();
+		resetErrorState();
+	}, [clearErrors]);
+
+	async function onSubmit(data: SignUpFormValues) {
+		const payload = {
+			email: data.email,
+			password: data.password,
+		};
+		const response = await dispatch(signUpUser(payload));
+		console.log({ response });
+		if (errorMessages.length === 0) {
+			navigate('/dashboard');
+		} else {
+			setError('email', {
+				type: 'custom',
+				message: t('auth.loginTryAgain'),
+			});
+		}
 	}
 
 	return (

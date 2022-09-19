@@ -5,7 +5,8 @@ import { useTranslation } from 'react-i18next';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleDrawer } from 'redux/slices/navigation/navigationSlice';
-import { ReduxNavigation, ReduxUser } from 'types/Redux';
+import { ReduxNavigation } from 'types/Redux';
+import { RootState } from 'redux/store';
 
 import {
 	Avatar,
@@ -56,7 +57,9 @@ export const Drawer = ({ children, currentRoute }: DrawerProps) => {
 	const { drawerOpen } = useSelector(
 		(state: ReduxNavigation) => state.navigation
 	);
-	const { value: user } = useSelector((state: ReduxUser) => state.user);
+	const currentUser = useSelector(
+		(state: RootState) => state.session.currentUser
+	);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const theme = useTheme();
@@ -223,7 +226,7 @@ export const Drawer = ({ children, currentRoute }: DrawerProps) => {
 						<IconButton
 							icon={
 								<Avatar
-									alt={`${user?.firstName} ${user?.lastName}`}
+									alt={`${currentUser?.first_name} ${currentUser?.last_name}`}
 									src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png"
 								/>
 							}

@@ -60,6 +60,7 @@ export const Login = () => {
 
 	useEffect(() => {
 		clearErrors();
+		resetErrorState();
 	}, [clearErrors]);
 
 	async function onSubmit(data: LoginFormValues) {
@@ -69,7 +70,6 @@ export const Login = () => {
 			password: data.password,
 		};
 		const response = await dispatch(loginUser(payload));
-		debugger;
 		if (errorMessages.length === 0) {
 			navigate('/dashboard');
 		} else {

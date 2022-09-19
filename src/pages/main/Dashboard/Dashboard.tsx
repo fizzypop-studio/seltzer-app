@@ -19,7 +19,7 @@ import {
 } from '@mui/icons-material';
 
 import { useSelector } from 'react-redux';
-import { ReduxUser } from 'types/Redux';
+import { RootState } from 'redux/store';
 
 import { colors } from 'theme';
 import * as S from './Dashboard.styles';
@@ -80,7 +80,9 @@ const pieChartData = [
 ];
 
 export const Dashboard = () => {
-	const { value: user } = useSelector((state: ReduxUser) => state.user);
+	const currentUser = useSelector(
+		(state: RootState) => state.session.currentUser
+	);
 	const theme = useTheme();
 	const { t } = useTranslation();
 
@@ -93,8 +95,8 @@ export const Dashboard = () => {
 			/>
 			<PageWrapper>
 				<Typography variant="h5">{`${t('pages.dashboard.welcome')}, ${
-					user?.firstName
-				} ${user?.lastName}`}</Typography>
+					currentUser?.first_name
+				} ${currentUser?.last_name}`}</Typography>
 				<S.DataWrapper>
 					<Grid
 						container

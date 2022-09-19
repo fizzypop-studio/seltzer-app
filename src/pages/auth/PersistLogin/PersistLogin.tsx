@@ -1,16 +1,24 @@
 import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
+import { RootState } from 'redux/store';
+import { refreshAccessToken } from 'redux/slices/sessions/sessionSlice';
+
 export const PersistLogin = () => {
-	const loading = false;
-	const accessToken = false;
-	const refreshToken = null;
+	const loading = useSelector((state: RootState) => state.session.loading);
+	const accessToken = useSelector(
+		(state: RootState) => state.session.accessToken
+	);
+	const refreshToken = useSelector(
+		(state: RootState) => state.session.refreshToken
+	);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		function verifyRefreshToken() {
 			try {
-				//dispatch(refershAccessToken(refreshToken))
-				console.log('refreshing Access Token');
+				dispatch(refreshAccessToken(refreshToken));
 			} catch (error) {
 				console.log('error refreshing access token');
 			}
@@ -19,7 +27,7 @@ export const PersistLogin = () => {
 		if (!accessToken) {
 			verifyRefreshToken();
 		}
-	}, [accessToken, refreshToken]);
+	}, [dispatch, accessToken, refreshToken]);
 
 	return <>{loading ? <>Loading...</> : <Outlet />}</>;
 };
