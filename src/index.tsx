@@ -8,7 +8,7 @@ import './index.css';
 import './i18n';
 
 import Router from './Router';
-import store from './redux/store';
+import { store } from 'redux/store';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(

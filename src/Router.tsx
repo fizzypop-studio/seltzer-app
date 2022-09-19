@@ -12,6 +12,7 @@ import {
 	Dashboard,
 	ErrorPage,
 	Contacts,
+	PersistLogin,
 } from './pages';
 
 import { ReduxUser } from './types/Redux';
@@ -37,30 +38,32 @@ const Router = () => {
 						element={<ResetPassword />}
 					/>
 
-					<Route
-						path="/dashboard"
-						element={
-							<RequireAuth>
-								<Dashboard />
-							</RequireAuth>
-						}
-					/>
-					<Route
-						path="/dashboard/contacts"
-						element={
-							<RequireAuth>
-								<Contacts />
-							</RequireAuth>
-						}
-					/>
-					<Route
-						path="/dashboard/account"
-						element={
-							<RequireAuth>
-								<Account />
-							</RequireAuth>
-						}
-					/>
+					<Route element={<PersistLogin />}>
+						<Route
+							path="/dashboard"
+							element={
+								<RequireAuth>
+									<Dashboard />
+								</RequireAuth>
+							}
+						/>
+						<Route
+							path="/dashboard/contacts"
+							element={
+								<RequireAuth>
+									<Contacts />
+								</RequireAuth>
+							}
+						/>
+						<Route
+							path="/dashboard/account"
+							element={
+								<RequireAuth>
+									<Account />
+								</RequireAuth>
+							}
+						/>
+					</Route>
 
 					<Route path="/logout" element={<Logout />} />
 					<Route path="/" element={<Navigate to="/login" />} />

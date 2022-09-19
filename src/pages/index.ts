@@ -6,6 +6,7 @@ export { SignUp } from 'pages/auth/SignUp';
 export { ForgotPassword } from 'pages/auth/ForgotPassword';
 export { ResetPassword } from 'pages/auth/ResetPassword';
 export { Logout } from 'pages/auth/Logout';
+export { PersistLogin } from 'pages/auth/PersistLogin';
 
 /*************
 Main Pages

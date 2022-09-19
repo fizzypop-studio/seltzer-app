@@ -16,6 +16,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from 'redux/store';
+import { loginUser, resetErrorState } from 'redux/slices/sessions/sessionSlice';
+
 import { Google, Twitter, Facebook } from '@mui/icons-material';
 
 import { EMAIL_REGEX } from 'helpers/regex';
@@ -28,6 +32,10 @@ type LoginFormValues = {
 };
 
 export const Login = () => {
+	const errorMessages = useSelector(
+		(state: RootState) => state.session.errorMessages
+	);
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 
@@ -47,9 +55,17 @@ export const Login = () => {
 		formState: { errors },
 	} = useForm<LoginFormValues>({ resolver: yupResolver(schema) });
 
-	const onSubmit = (data: LoginFormValues) => {
+	const onSubmit = async (data: LoginFormValues) => {
 		console.log({ data });
-		navigate('/dashboard');
+		const payload = {
+			email: data.email,
+			password: data.password,
+		};
+		const response = await dispatch(loginUser(payload));
+		debugger;
+		if (errorMessages.length === 0) {
+			navigate('/dashboard');
+		}
 	};
 
 	return (

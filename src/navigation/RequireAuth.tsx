@@ -1,17 +1,22 @@
-import { Navigate, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { ReduxUser } from 'types/Redux';
+export const RequireAuth: React.FC<{ children: any }> = ({ children }) => {
+	const navigate = useNavigate();
+	const accessToken = false;
+	const loading = false;
 
-export const RequireAuth: React.FC<{ children: JSX.Element }> = ({
-	children,
-}) => {
-	const user = useSelector((state: ReduxUser) => state.user.value);
-	const location = useLocation();
+	useEffect(() => {
+		if (!accessToken && !loading) {
+			navigate('/login');
+		}
+	}, [navigate, accessToken, loading]);
 
-	if (!user) {
-		return <Navigate to="/login" state={{ from: location }} />;
+	if (accessToken) {
+		return children;
+	} else if (loading) {
+		return <p>Loading...</p>;
+	} else {
+		return <p>Something went wrong</p>;
 	}
-
-	return children;
 };
