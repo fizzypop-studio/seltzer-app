@@ -53,10 +53,10 @@ export const SignUp = () => {
 		formState: { errors },
 	} = useForm<SignUpFormValues>({ resolver: yupResolver(schema) });
 
-	const onSubmit = (data: SignUpFormValues) => {
+	function onSubmit(data: SignUpFormValues) {
 		console.log({ data });
 		navigate('/dashboard');
-	};
+	}
 
 	return (
 		<S.Wrapper>

@@ -34,9 +34,9 @@ export const Contacts = () => {
 		{ id: 'email', label: 'Email', minWidth: 150 },
 	];
 
-	const createData = (name: string, role: string, email: string): Data => {
+	function createData(name: string, role: string, email: string): Data {
 		return { name, role, email };
-	};
+	}
 
 	const rows = [
 		createData(
@@ -59,13 +59,13 @@ export const Contacts = () => {
 		createData('Creed Bratton', 'Unknown', 'creed@email.com'),
 	];
 
-	const handleShowContactModal = () => {
+	function handleShowContactModal() {
 		setShowContactModal(true);
-	};
+	}
 
-	const handleCloseContactModal = () => {
+	function handleCloseContactModal() {
 		setShowContactModal(false);
-	};
+	}
 
 	return (
 		<Drawer currentRoute="/dashboard/contatcs">

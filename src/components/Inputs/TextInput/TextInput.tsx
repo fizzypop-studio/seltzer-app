@@ -18,15 +18,15 @@ export const TextInput = forwardRef(
 		const componentRef = useRef<HTMLIFrameElement>(null);
 		const { name, control } = { ...props };
 
-		const handleClickShowPassword = () => {
+		function handleClickShowPassword() {
 			setShowPassword(!showPassword);
-		};
+		}
 
-		const handleMouseDownPassword = (
+		function handleMouseDownPassword(
 			event: React.MouseEvent<HTMLButtonElement>
-		) => {
+		) {
 			event.preventDefault();
-		};
+		}
 
 		return (
 			<S.Wrapper>

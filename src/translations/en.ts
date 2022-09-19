@@ -3,6 +3,8 @@ export const en = {
 		auth: {
 			login: 'Login',
 			logIn: 'Log In',
+			loginTryAgain:
+				'There was an error trying to login. Please try again.',
 			loginSubtitle:
 				'Hello there, Enter your details to sign in to your account',
 			signUpSubtitle:

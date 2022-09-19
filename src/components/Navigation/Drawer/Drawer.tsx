@@ -66,49 +66,49 @@ export const Drawer = ({ children, currentRoute }: DrawerProps) => {
 
 	const notificationCount = 17;
 
-	const handleDrawerOpen = () => {
+	function handleDrawerOpen() {
 		dispatch(toggleDrawer(true));
-	};
+	}
 
-	const handleDrawerClose = () => {
+	function handleDrawerClose() {
 		dispatch(toggleDrawer(false));
-	};
+	}
 
 	const isMenuOpen = Boolean(anchorEl);
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-	const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+	function handleProfileMenuOpen(event: React.MouseEvent<HTMLElement>) {
 		setAnchorEl(event.currentTarget);
-	};
+	}
 
-	const handleMobileMenuClose = () => {
+	function handleMobileMenuClose() {
 		setMobileMoreAnchorEl(null);
-	};
+	}
 
-	const handleMenuClose = () => {
+	function handleMenuClose() {
 		setAnchorEl(null);
 		handleMobileMenuClose();
-	};
+	}
 
-	const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+	function handleMobileMenuOpen(event: React.MouseEvent<HTMLElement>) {
 		setMobileMoreAnchorEl(event.currentTarget);
-	};
+	}
 
-	const handleOpenLogoutModal = () => {
+	function handleOpenLogoutModal() {
 		setLogoutModalOpen(true);
-	};
+	}
 
-	const handleCloseLogoutModal = () => {
+	function handleCloseLogoutModal() {
 		setLogoutModalOpen(false);
-	};
+	}
 
-	const handleLogout = () => {
+	function handleLogout() {
 		navigate('/logout');
-	};
+	}
 
-	const handleUpgrade = () => {
+	function handleUpgrade() {
 		console.log('Upgrade Account');
-	};
+	}
 
 	const menuId = 'primary-search-account-menu';
 	const renderMenu = (

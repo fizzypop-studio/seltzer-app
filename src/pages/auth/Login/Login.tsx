@@ -25,6 +25,7 @@ import { Google, Twitter, Facebook } from '@mui/icons-material';
 import { EMAIL_REGEX } from 'helpers/regex';
 
 import * as S from './Login.styles';
+import { useEffect } from 'react';
 
 type LoginFormValues = {
 	email: string;
@@ -53,9 +54,15 @@ export const Login = () => {
 		handleSubmit,
 		control,
 		formState: { errors },
+		setError,
+		clearErrors,
 	} = useForm<LoginFormValues>({ resolver: yupResolver(schema) });
 
-	const onSubmit = async (data: LoginFormValues) => {
+	useEffect(() => {
+		clearErrors();
+	}, [clearErrors]);
+
+	async function onSubmit(data: LoginFormValues) {
 		console.log({ data });
 		const payload = {
 			email: data.email,
@@ -65,8 +72,13 @@ export const Login = () => {
 		debugger;
 		if (errorMessages.length === 0) {
 			navigate('/dashboard');
+		} else {
+			setError('email', {
+				type: 'custom',
+				message: t('auth.loginTryAgain'),
+			});
 		}
-	};
+	}
 
 	return (
 		<S.Wrapper>

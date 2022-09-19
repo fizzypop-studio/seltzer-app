@@ -6,7 +6,9 @@ export default {
 	component: ContactForm,
 } as ComponentMeta<typeof ContactForm>;
 
-const handleCancel = () => console.log('Cancel');
+function handleCancel() {
+	console.log('Cancel');
+}
 
 export const Default: ComponentStory<typeof ContactForm> = () => (
 	<ContactForm handleCancel={handleCancel} />

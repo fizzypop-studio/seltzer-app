@@ -41,10 +41,10 @@ export const ForgotPassword = () => {
 		formState: { errors },
 	} = useForm<ForgotPasswordFormValues>({ resolver: yupResolver(schema) });
 
-	const onSubmit = (data: ForgotPasswordFormValues) => {
+	function onSubmit(data: ForgotPasswordFormValues) {
 		console.log({ data });
 		navigate('/login');
-	};
+	}
 
 	return (
 		<S.Wrapper>

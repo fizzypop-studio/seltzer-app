@@ -10,13 +10,15 @@ export default {
 
 export const Default: ComponentStory<typeof Modal> = () => {
 	const [open, setOpen] = useState(false);
-	const handleOpenModal = () => {
-		setOpen(true);
-	};
 
-	const handleCloseModal = () => {
+	function handleOpenModal() {
+		setOpen(true);
+	}
+
+	function handleCloseModal() {
 		setOpen(false);
-	};
+	}
+
 	return (
 		<>
 			<Button text="Open Modal" onClick={handleOpenModal} />
