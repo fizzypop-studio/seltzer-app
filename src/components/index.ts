@@ -3,6 +3,7 @@ General
 *************/
 export { Link } from './Link';
 export { Typography } from './Typography';
+export { Loader } from './Loader';
 
 /*************
 Buttons

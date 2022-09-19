@@ -10,10 +10,14 @@ const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
 
 export async function createUserWithEmailAndPassword(
+	firstName: string,
+	lastName: string,
 	email: string,
 	password: string
 ) {
 	const data = {
+		first_name: firstName,
+		last_name: lastName,
 		email: email,
 		password: password,
 		client_id: CLIENT_ID,

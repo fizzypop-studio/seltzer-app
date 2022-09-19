@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { RequireAuth } from './navigation/RequireAuth';
+import { RequireAuth } from 'navigation/RequireAuth';
+import { PersistLogin } from 'navigation/PersistLogin';
 
 import {
 	Account,
@@ -11,7 +12,6 @@ import {
 	Dashboard,
 	ErrorPage,
 	Contacts,
-	PersistLogin,
 } from './pages';
 
 const Router = () => {
@@ -55,7 +55,7 @@ const Router = () => {
 				</Route>
 
 				<Route path="/logout" element={<Logout />} />
-				<Route path="/" element={<Navigate to="/login" />} />
+				<Route path="/" element={<Navigate to="/dashboard" />} />
 				<Route path="*" element={<ErrorPage />} />
 			</Routes>
 		</BrowserRouter>

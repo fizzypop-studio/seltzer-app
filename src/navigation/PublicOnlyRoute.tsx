@@ -1,26 +1,24 @@
-import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Navigate, useLocation } from 'react-router-dom';
 import { Loader } from 'components';
 import { ErrorPage } from 'pages/error/ErrorPage';
 
 import { RootState } from 'redux/store';
 
-export const RequireAuth: React.FC<{ children: any }> = ({ children }) => {
-	const loading = useSelector((state: RootState) => state.session.loading);
+function PublicOnlyRoute({ children }: any) {
 	const accessToken = useSelector(
 		(state: RootState) => state.session.accessToken
 	);
+	const loading = useSelector((state: RootState) => state.session.loading);
 	const location = useLocation();
 	const fromLocation = (location.state as any)?.from;
-	const previousLocation = fromLocation
-		? fromLocation
-		: { pathname: '/login' };
+	const previousLocation = fromLocation ? fromLocation : { pathname: '/' };
 
-	if (accessToken) {
+	if (!accessToken && !loading) {
 		return children;
 	} else if (loading) {
 		return <Loader />;
-	} else if (!accessToken && !loading) {
+	} else if (accessToken && !loading) {
 		return (
 			<Navigate
 				to={previousLocation}
@@ -31,4 +29,6 @@ export const RequireAuth: React.FC<{ children: any }> = ({ children }) => {
 	} else {
 		return <ErrorPage />;
 	}
-};
+}
+
+export default PublicOnlyRoute;

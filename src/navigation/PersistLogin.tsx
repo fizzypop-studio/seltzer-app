@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
+import { Loader } from 'components';
 
 import { RootState } from 'redux/store';
 import { refreshAccessToken } from 'redux/slices/sessions/sessionSlice';
@@ -29,5 +30,5 @@ export const PersistLogin = () => {
 		}
 	}, [dispatch, accessToken, refreshToken]);
 
-	return <>{loading ? <>Loading...</> : <Outlet />}</>;
+	return <>{loading ? <Loader /> : <Outlet />}</>;
 };

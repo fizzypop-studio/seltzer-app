@@ -29,6 +29,13 @@ export interface User {
 	createdAt?: string;
 }
 
+export interface UserSignUpData {
+	first_name: string;
+	last_name: string;
+	email: string;
+	password: string;
+}
+
 export interface UserLoginData {
 	email: string;
 	password: string;
@@ -56,11 +63,13 @@ interface AuthState {
 const initialState: AuthState = {
 	currentUser: {
 		id: undefined,
+		first_name: undefined,
+		last_name: undefined,
 		email: undefined,
 		role: undefined,
 		createdAt: undefined,
 	},
-	loading: true,
+	loading: false,
 	error: false,
 	errorMessages: [],
 	accessToken: undefined,
@@ -71,8 +80,10 @@ const initialState: AuthState = {
 
 export const signUpUser = createAsyncThunk(
 	'session/signUpUser',
-	async (payload: UserLoginData, { rejectWithValue }) => {
+	async (payload: UserSignUpData, { rejectWithValue }) => {
 		const response = await createUserWithEmailAndPassword(
+			payload.first_name,
+			payload.last_name,
 			payload.email,
 			payload.password
 		);
@@ -134,7 +145,6 @@ export const logoutUser = createAsyncThunk(
 	async (payload: string, { rejectWithValue }) => {
 		const response = await logoutUserWithToken(payload);
 		// if response has errors rejectwithvalue
-		console.log(response);
 		if (response.error) {
 			// The value we return becomes the `rejected` action payload
 			return rejectWithValue(response);
@@ -198,6 +208,8 @@ export const sessionSlice = createSlice({
 				state.tokenType = action.payload.token_type;
 				state.currentUser = {
 					id: action.payload.id,
+					first_name: action.payload.first_name,
+					last_name: action.payload.last_name,
 					email: action.payload.email,
 					role: action.payload.role,
 					createdAt: action.payload.created_at,
@@ -224,6 +236,8 @@ export const sessionSlice = createSlice({
 				state.expiresIn = action.payload.expires_in;
 				state.currentUser = {
 					id: action.payload.id,
+					first_name: action.payload.first_name,
+					last_name: action.payload.last_name,
 					email: action.payload.email,
 					role: action.payload.role,
 					createdAt: action.payload.created_at,
@@ -252,6 +266,8 @@ export const sessionSlice = createSlice({
 				state.expiresIn = action.payload.expires_in;
 				state.currentUser = {
 					id: action.payload.id,
+					first_name: action.payload.first_name,
+					last_name: action.payload.last_name,
 					email: action.payload.email,
 					role: action.payload.role,
 					createdAt: action.payload.created_at,
@@ -274,6 +290,8 @@ export const sessionSlice = createSlice({
 			.addCase(logoutUser.fulfilled, (state) => {
 				state.currentUser = {
 					id: undefined,
+					first_name: undefined,
+					last_name: undefined,
 					email: undefined,
 					role: undefined,
 					createdAt: undefined,
@@ -305,6 +323,8 @@ export const sessionSlice = createSlice({
 				state.tokenType = action.payload.token_type;
 				state.currentUser = {
 					id: action.payload.id,
+					first_name: action.payload.first_name,
+					last_name: action.payload.last_name,
 					email: action.payload.email,
 					role: action.payload.role,
 					createdAt: action.payload.created_at,
