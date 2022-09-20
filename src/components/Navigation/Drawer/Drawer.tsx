@@ -222,6 +222,7 @@ export const Drawer = ({ children, currentRoute }: DrawerProps) => {
 							}
 							size="large"
 							color="inherit"
+							sx={{ p: 2 }}
 						></IconButton>
 						<IconButton
 							icon={
@@ -231,7 +232,6 @@ export const Drawer = ({ children, currentRoute }: DrawerProps) => {
 								/>
 							}
 							onClick={handleProfileMenuOpen}
-							sx={{ p: 0 }}
 						></IconButton>
 					</Box>
 					<Box sx={{ display: { xs: 'flex', md: 'none' } }}>

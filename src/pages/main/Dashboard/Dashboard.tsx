@@ -85,7 +85,7 @@ export const Dashboard = () => {
 	);
 	const theme = useTheme();
 	const { t } = useTranslation();
-	console.log({ currentUser });
+
 	return (
 		<Drawer currentRoute="/dashboard">
 			<Helmet

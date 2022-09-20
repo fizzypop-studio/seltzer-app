@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
 	Drawer,
 	Helmet,
@@ -9,6 +9,10 @@ import {
 } from 'components';
 import { useTranslation } from 'react-i18next';
 import { Add } from '@mui/icons-material';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { getUserContacts } from 'redux/slices/contacts/contactSlice';
+import { RootState } from 'redux/store';
 
 type Column = {
 	id: 'name' | 'role' | 'email';
@@ -26,7 +30,18 @@ type Data = {
 
 export const Contacts = () => {
 	const [showContactModal, setShowContactModal] = useState(false);
+	const accessToken = useSelector(
+		(state: RootState) => state.session.accessToken
+	);
+	const userContacts = useSelector(
+		(state: RootState) => state.contact.userContacts
+	);
+	const dispatch = useDispatch();
 	const { t } = useTranslation();
+
+	useEffect(() => {
+		dispatch(getUserContacts(accessToken || ''));
+	}, [dispatch, accessToken]);
 
 	const columns: Column[] = [
 		{ id: 'name', label: 'Name', minWidth: 170 },
@@ -38,26 +53,16 @@ export const Contacts = () => {
 		return { name, role, email };
 	}
 
-	const rows = [
-		createData(
-			'Dwight Shrute',
-			'Assistant to the Regional Manager',
-			'dwight@email.com'
-		),
-		createData('Michael Scott', 'Regional Manager', 'michael@email.com'),
-		createData('Jim Halpert', 'Sales', 'jim@email.com'),
-		createData('Pam Halpert', 'Office Administrator', 'pam@email.com'),
-		createData('Kevin Malone', 'Accounting', 'kevin@email.com'),
-		createData('Cathy Simms', 'Sales', 'cathy@email.com'),
-		createData('Erin Hannon', 'Secretary', 'erin@email.com'),
-		createData('Andy Bernard', 'Sales', 'andy@email.com'),
-		createData('Toby Flenderson', 'HR', 'toby@email.com'),
-		createData('Angela Martin', 'Accounting', 'angela@email.com'),
-		createData('Stanley Hudson', 'Sales', 'stanley@email.com'),
-		createData('Ryan Howard', 'Temp', 'ryan@email.com'),
-		createData('Oscar Martinez', 'Accounting', 'oscar@email.com'),
-		createData('Creed Bratton', 'Unknown', 'creed@email.com'),
-	];
+	const rows =
+		userContacts && userContacts.length > 0
+			? userContacts.map((contact) =>
+					createData(
+						`${contact.first_name} ${contact.last_name}`,
+						contact.role || '---',
+						contact.email || '---'
+					)
+			  )
+			: [];
 
 	function handleShowContactModal() {
 		setShowContactModal(true);

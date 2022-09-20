@@ -2,11 +2,13 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
 import navigationReducer from './slices/navigation/navigationSlice';
 import sessionReducer from './slices/sessions/sessionSlice';
+import contactReducer from './slices/contacts/contactSlice';
 
 export const store = configureStore({
 	reducer: {
 		navigation: navigationReducer,
 		session: sessionReducer,
+		contact: contactReducer,
 	},
 });
 
