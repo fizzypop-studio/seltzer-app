@@ -5,7 +5,7 @@ import { ErrorPage } from 'pages/error/ErrorPage';
 
 import { RootState } from 'redux/store';
 
-function PublicOnlyRoute({ children }: any) {
+export const PublicOnlyRoute = ({ children }: any) => {
 	const accessToken = useSelector(
 		(state: RootState) => state.session.accessToken
 	);
@@ -29,6 +29,4 @@ function PublicOnlyRoute({ children }: any) {
 	} else {
 		return <ErrorPage />;
 	}
-}
-
-export default PublicOnlyRoute;
+};

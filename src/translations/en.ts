@@ -32,13 +32,17 @@ export const en = {
 			password: {
 				label: 'Password',
 				required: 'Password is required',
+				match: 'Your passwords must match',
 			},
 			confirmPassword: {
 				label: 'Confirm Password',
 				required: 'Confirm Password is required',
 			},
 			forgotPassword: 'Forgot Password',
+			sendEmail: 'Send Email',
 			resetPassword: 'Reset Password',
+			resetPasswordSubtitle:
+				'Enter your new password and confirm it below.',
 			trouble: 'Having trouble signing in?',
 			signInWith: 'Or Sign in with',
 			signUpWith: 'Or Sign up with',

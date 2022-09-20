@@ -64,7 +64,6 @@ export const Login = () => {
 	}, [clearErrors]);
 
 	async function onSubmit(data: LoginFormValues) {
-		console.log({ data });
 		const payload = {
 			email: data.email,
 			password: data.password,

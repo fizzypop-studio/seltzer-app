@@ -5,6 +5,8 @@ const SIGNUP_URL = '/users';
 const UPDATE_PROFILE_URL = '/users';
 const LOGOUT_URL = '/oauth/revoke';
 const CURRENT_USER_URL = '/users/me';
+const SEND_RESET_PASSWORD_URL = '/users/send-reset-password';
+const RESET_PASSWORD_URL = '/users/reset-password';
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
@@ -18,8 +20,8 @@ export async function createUserWithEmailAndPassword(
 	const data = {
 		first_name: firstName,
 		last_name: lastName,
-		email: email,
-		password: password,
+		email,
+		password,
 		client_id: CLIENT_ID,
 	};
 
@@ -39,8 +41,8 @@ export async function loginWithEmailAndPassword(
 ) {
 	const data = {
 		grant_type: 'password',
-		email: email,
-		password: password,
+		email,
+		password,
 		client_id: CLIENT_ID,
 		client_secret: CLIENT_SECRET,
 	};
@@ -63,8 +65,8 @@ export async function updateUserProfile(
 ) {
 	const data = {
 		current_password: currentPassword,
-		email: email,
-		password: password,
+		email,
+		password,
 		client_id: CLIENT_ID,
 		client_secret: CLIENT_SECRET,
 	};
@@ -128,6 +130,46 @@ export async function getCurrentUser(accessToken: string) {
 
 	return axios
 		.get(CURRENT_USER_URL, config)
+		.then((response: any) => {
+			return response.data;
+		})
+		.catch((error: any) => {
+			return error.response.data;
+		});
+}
+
+export async function sendResetUserPasswordEmail(email: string) {
+	const data = {
+		email,
+		client_id: CLIENT_ID,
+		client_secret: CLIENT_SECRET,
+	};
+
+	return axios
+		.post(SEND_RESET_PASSWORD_URL, data)
+		.then((response: any) => {
+			return response.data;
+		})
+		.catch((error: any) => {
+			return error.response.data;
+		});
+}
+
+export async function resetUserPassword(
+	password: string,
+	passwordConfirmation: string,
+	resetPasswordToken: string | null
+) {
+	const data = {
+		password,
+		password_confirmation: passwordConfirmation,
+		reset_password_token: resetPasswordToken,
+		client_id: CLIENT_ID,
+		client_secret: CLIENT_SECRET,
+	};
+
+	return axios
+		.put(RESET_PASSWORD_URL, data)
 		.then((response: any) => {
 			return response.data;
 		})

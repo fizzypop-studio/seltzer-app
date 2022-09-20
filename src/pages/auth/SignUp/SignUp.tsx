@@ -55,7 +55,9 @@ export const SignUp = () => {
 				.matches(EMAIL_REGEX, t('auth.email.valid'))
 				.required(t('auth.email.required')),
 			password: yup.string().required(),
-			confirmPassword: yup.string().required(),
+			confirmPassword: yup
+				.string()
+				.oneOf([yup.ref('password')], t('auth.password.match')),
 		})
 		.required();
 
@@ -179,7 +181,7 @@ export const SignUp = () => {
 							error={!!errors.confirmPassword}
 							helperText={
 								!!errors.confirmPassword
-									? t('auth.password.required')
+									? errors.confirmPassword.message
 									: ''
 							}
 							required

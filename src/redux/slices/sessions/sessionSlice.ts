@@ -6,6 +6,8 @@ import {
 	logoutUserWithToken,
 	requestAccessTokenWithRefreshToken,
 	updateUserProfile,
+	sendResetUserPasswordEmail,
+	resetUserPassword,
 } from 'services/api/sessionAPI';
 
 function storeRefreshToken(token: string) {
@@ -46,6 +48,12 @@ export interface UserUpdateData {
 	token: string | undefined;
 	email?: string;
 	password?: string;
+}
+
+export interface UserResetPasswordData {
+	password: string;
+	password_confirmation: string;
+	reset_password_token: string | null;
 }
 
 interface AuthState {
@@ -144,6 +152,40 @@ export const logoutUser = createAsyncThunk(
 	'session/logoutUser',
 	async (payload: string, { rejectWithValue }) => {
 		const response = await logoutUserWithToken(payload);
+		// if response has errors rejectwithvalue
+		if (response.error) {
+			// The value we return becomes the `rejected` action payload
+			return rejectWithValue(response);
+		}
+		// The value we return becomes the `fulfilled` action payload
+		return response;
+	}
+);
+
+export const sendResetPasswordEmail = createAsyncThunk(
+	'session/sendResetPasswordEmail',
+	async (payload: string, { rejectWithValue }) => {
+		const response = await sendResetUserPasswordEmail(payload);
+		console.log({ response });
+		// if response has errors rejectwithvalue
+		if (response.error) {
+			// The value we return becomes the `rejected` action payload
+			return rejectWithValue(response);
+		}
+		// The value we return becomes the `fulfilled` action payload
+		return response;
+	}
+);
+
+export const resetPassword = createAsyncThunk(
+	'session/resetPassword',
+	async (payload: UserResetPasswordData, { rejectWithValue }) => {
+		const response = await resetUserPassword(
+			payload.password,
+			payload.password_confirmation,
+			payload.reset_password_token
+		);
+		console.log({ response });
 		// if response has errors rejectwithvalue
 		if (response.error) {
 			// The value we return becomes the `rejected` action payload
@@ -302,6 +344,36 @@ export const sessionSlice = createSlice({
 				state.tokenType = undefined;
 				removeRefreshToken();
 
+				state.loading = false;
+				state.error = false;
+				state.errorMessages = [];
+			})
+			.addCase(sendResetPasswordEmail.rejected, (state, action: any) => {
+				state.loading = false;
+				state.error = true;
+				state.errorMessages = [action.payload.error];
+			})
+			.addCase(sendResetPasswordEmail.pending, (state) => {
+				state.loading = true;
+				state.error = false;
+				state.errorMessages = [];
+			})
+			.addCase(sendResetPasswordEmail.fulfilled, (state) => {
+				state.loading = false;
+				state.error = false;
+				state.errorMessages = [];
+			})
+			.addCase(resetPassword.rejected, (state, action: any) => {
+				state.loading = false;
+				state.error = true;
+				state.errorMessages = [action.payload.error];
+			})
+			.addCase(resetPassword.pending, (state) => {
+				state.loading = true;
+				state.error = false;
+				state.errorMessages = [];
+			})
+			.addCase(resetPassword.fulfilled, (state) => {
 				state.loading = false;
 				state.error = false;
 				state.errorMessages = [];

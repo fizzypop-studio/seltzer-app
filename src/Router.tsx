@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { RequireAuth } from 'navigation/RequireAuth';
 import { PersistLogin } from 'navigation/PersistLogin';
+import { PublicOnlyRoute } from 'navigation/PublicOnlyRoute';
 
 import {
 	Account,
@@ -18,13 +19,38 @@ const Router = () => {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/login" element={<Login />} />
-				<Route path="/sign-up" element={<SignUp />} />
-
-				<Route path="/forgot-password" element={<ForgotPassword />} />
 				<Route
-					path="/reset-password/:aToken/:bToken"
-					element={<ResetPassword />}
+					path="/login"
+					element={
+						<PublicOnlyRoute>
+							<Login />
+						</PublicOnlyRoute>
+					}
+				/>
+				<Route
+					path="/sign-up"
+					element={
+						<PublicOnlyRoute>
+							<SignUp />
+						</PublicOnlyRoute>
+					}
+				/>
+
+				<Route
+					path="/forgot-password"
+					element={
+						<PublicOnlyRoute>
+							<ForgotPassword />
+						</PublicOnlyRoute>
+					}
+				/>
+				<Route
+					path="/users/password/edit"
+					element={
+						<PublicOnlyRoute>
+							<ResetPassword />
+						</PublicOnlyRoute>
+					}
 				/>
 
 				<Route element={<PersistLogin />}>
