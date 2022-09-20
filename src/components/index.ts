@@ -74,6 +74,11 @@ Forms
 export { ContactForm } from './Forms/ContactForm';
 
 /*************
+Placeholders
+*************/
+export { EmptyPlaceholder } from './Placeholders/EmptyPlaceholder';
+
+/*************
 SEO
 *************/
 export { Helmet } from './SEO/Helmet';

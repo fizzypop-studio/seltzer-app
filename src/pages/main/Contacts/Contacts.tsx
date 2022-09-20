@@ -6,9 +6,10 @@ import {
 	Modal,
 	PageHeader,
 	Table,
+	EmptyPlaceholder,
 } from 'components';
 import { useTranslation } from 'react-i18next';
-import { Add } from '@mui/icons-material';
+import { Add, Group } from '@mui/icons-material';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserContacts } from 'redux/slices/contacts/contactSlice';
@@ -55,7 +56,7 @@ export const Contacts = () => {
 
 	const rows =
 		userContacts && userContacts.length > 0
-			? userContacts.map((contact) =>
+			? userContacts.map((contact: any) =>
 					createData(
 						`${contact.first_name} ${contact.last_name}`,
 						contact.role || '---',
@@ -85,7 +86,15 @@ export const Contacts = () => {
 				actionClick={handleShowContactModal}
 				actionIcon={<Add />}
 			/>
-			<Table columns={columns} rows={rows} />
+			{userContacts?.length === 0 ? (
+				<EmptyPlaceholder
+					icon={<Group />}
+					message={t('pages.contacts.empty')}
+				/>
+			) : (
+				<Table columns={columns} rows={rows} />
+			)}
+
 			<Modal
 				open={showContactModal}
 				onClose={handleCloseContactModal}
@@ -93,7 +102,10 @@ export const Contacts = () => {
 				content="Fill out the form below to create a new contact"
 				onRequestClose={handleCloseContactModal}
 			>
-				<ContactForm handleCancel={handleCloseContactModal} />
+				<ContactForm
+					handleCloseModal={handleCloseContactModal}
+					handleCancel={handleCloseContactModal}
+				/>
 			</Modal>
 		</Drawer>
 	);

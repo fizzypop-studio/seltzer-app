@@ -6,4 +6,4 @@ export default {
 	component: Loader,
 } as ComponentMeta<typeof Loader>;
 
-export const H1: ComponentStory<typeof Loader> = () => <Loader />;
+export const Default: ComponentStory<typeof Loader> = () => <Loader />;

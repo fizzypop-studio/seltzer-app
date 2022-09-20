@@ -6,6 +6,15 @@ const UPDATE_CONTACT_URL = '/users';
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
 
+export interface Contact {
+	id?: string;
+	email?: string;
+	first_name?: string;
+	last_name?: string;
+	role?: string;
+	createdAt?: string;
+}
+
 export async function getContacts(accessToken: string) {
 	const config = {
 		headers: {
@@ -14,6 +23,25 @@ export async function getContacts(accessToken: string) {
 	};
 	return axios
 		.get(CONTACTS_URL, config)
+		.then((response: any) => {
+			return response.data;
+		})
+		.catch((error: any) => {
+			return error.response.data;
+		});
+}
+
+export async function createContact(
+	data: Contact,
+	accessToken: string | undefined
+) {
+	const config = {
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+		},
+	};
+	return axios
+		.post(CONTACTS_URL, data, config)
 		.then((response: any) => {
 			return response.data;
 		})

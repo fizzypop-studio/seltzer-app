@@ -5,10 +5,15 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { createUserContact } from 'redux/slices/contacts/contactSlice';
+import { RootState } from 'redux/store';
+
 import { EMAIL_REGEX } from 'helpers/regex';
 import * as S from './ContactForm.styles';
 
 type ContactFormProps = {
+	handleCloseModal?: () => void;
 	handleCancel: () => void;
 };
 
@@ -19,9 +24,23 @@ type ContactFormValues = {
 	role: string;
 };
 
-export const ContactForm = ({ handleCancel }: ContactFormProps) => {
+export const ContactForm = ({
+	handleCloseModal,
+	handleCancel,
+}: ContactFormProps) => {
 	const [avatar, setAvatar] = useState('');
 	const [file, setFile] = useState(null);
+	const errorMessages = useSelector(
+		(state: RootState) => state.contact.errorMessages
+	);
+	const loading = useSelector((state: RootState) => state.contact.loading);
+	const accessToken = useSelector(
+		(state: RootState) => state.session.accessToken
+	);
+	const currentUser = useSelector(
+		(state: RootState) => state.session.currentUser
+	);
+	const dispatch = useDispatch();
 	const { t } = useTranslation();
 
 	const schema = yup
@@ -40,11 +59,29 @@ export const ContactForm = ({ handleCancel }: ContactFormProps) => {
 		handleSubmit,
 		control,
 		formState: { errors },
+		setError,
 	} = useForm<ContactFormValues>({ resolver: yupResolver(schema) });
 
-	const onSubmit = (data: ContactFormValues) => {
+	async function onSubmit(data: ContactFormValues) {
 		console.log({ data });
-	};
+		const payload = {
+			first_name: data.firstName,
+			last_name: data.lastName,
+			email: data.email,
+			role: data.role,
+			token: accessToken,
+			user_id: currentUser?.id,
+		};
+		const response = await dispatch(createUserContact(payload));
+		if (errorMessages.length === 0) {
+			if (handleCloseModal) handleCloseModal();
+		} else {
+			setError('email', {
+				type: 'custom',
+				message: 'Something went wrong. Please try again',
+			});
+		}
+	}
 
 	const handleSetAvatarFile = (avatarFile: any) => {
 		setFile(avatarFile);

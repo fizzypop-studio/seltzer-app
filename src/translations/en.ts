@@ -96,6 +96,7 @@ export const en = {
 				addContact: 'Add Contact',
 				addContactDesc:
 					'Fill out the form below to create a new contact',
+				empty: "You currently have no contacts. Create a new contact using 'Add Button' above",
 			},
 			account: {
 				title: 'My Account',
