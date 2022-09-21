@@ -13,6 +13,7 @@ import {
 	Dashboard,
 	ErrorPage,
 	Contacts,
+	ContactProfile,
 } from './pages';
 
 const Router = () => {
@@ -63,6 +64,14 @@ const Router = () => {
 						}
 					/>
 					<Route
+						path="/dashboard/contacts/:id"
+						element={
+							<RequireAuth>
+								<ContactProfile />
+							</RequireAuth>
+						}
+					/>
+					<Route
 						path="/dashboard/contacts"
 						element={
 							<RequireAuth>
@@ -70,6 +79,7 @@ const Router = () => {
 							</RequireAuth>
 						}
 					/>
+
 					<Route
 						path="/dashboard/account"
 						element={

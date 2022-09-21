@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AvatarUpload, Button, Stack, TextInput } from 'components';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -6,13 +6,18 @@ import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { createUserContact } from 'redux/slices/contacts/contactSlice';
+import {
+	createUserContact,
+	updateUserContact,
+} from 'redux/slices/contacts/contactSlice';
 import { RootState } from 'redux/store';
 
+import { Contact } from 'types/Contact';
 import { EMAIL_REGEX } from 'helpers/regex';
 import * as S from './ContactForm.styles';
 
 type ContactFormProps = {
+	contact?: Contact;
 	handleCloseModal?: () => void;
 	handleCancel: () => void;
 };
@@ -25,6 +30,7 @@ type ContactFormValues = {
 };
 
 export const ContactForm = ({
+	contact,
 	handleCloseModal,
 	handleCancel,
 }: ContactFormProps) => {
@@ -60,10 +66,23 @@ export const ContactForm = ({
 		control,
 		formState: { errors },
 		setError,
+		reset,
 	} = useForm<ContactFormValues>({ resolver: yupResolver(schema) });
 
+	useEffect(() => {
+		if (contact) {
+			const defaultValues: ContactFormValues = {
+				firstName: contact.first_name || '',
+				lastName: contact.last_name || '',
+				role: contact.role || '',
+				email: contact.email || '',
+			};
+
+			reset({ ...defaultValues });
+		}
+	}, [contact, reset]);
+
 	async function onSubmit(data: ContactFormValues) {
-		console.log({ data });
 		const payload = {
 			first_name: data.firstName,
 			last_name: data.lastName,
@@ -72,7 +91,11 @@ export const ContactForm = ({
 			token: accessToken,
 			user_id: currentUser?.id,
 		};
-		const response = await dispatch(createUserContact(payload));
+		const response = await dispatch(
+			contact
+				? updateUserContact({ id: contact.id, ...payload })
+				: createUserContact(payload)
+		);
 		if (errorMessages.length === 0) {
 			if (handleCloseModal) handleCloseModal();
 		} else {
@@ -138,12 +161,35 @@ export const ContactForm = ({
 				required
 			/>
 			<S.ActionWrapper>
-				<Button variant="text" text="Cancel" onClick={handleCancel} />
 				<Button
-					text={t('pages.contacts.addContact')}
-					type="submit"
-					className="submit-button"
+					variant="text"
+					text={t('general.cancel')}
+					disabled={loading}
+					onClick={handleCancel}
 				/>
+				{contact ? (
+					<Button
+						text={
+							loading
+								? t('pages.contactProfile.editContactLoading')
+								: t('pages.contactProfile.editContact')
+						}
+						type="submit"
+						className="submit-button"
+						disabled={loading}
+					/>
+				) : (
+					<Button
+						text={
+							loading
+								? t('pages.contacts.addContactLoading')
+								: t('pages.contacts.addContact')
+						}
+						type="submit"
+						className="submit-button"
+						disabled={loading}
+					/>
+				)}
 			</S.ActionWrapper>
 		</S.Form>
 	);

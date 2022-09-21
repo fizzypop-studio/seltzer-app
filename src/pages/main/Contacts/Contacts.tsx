@@ -16,7 +16,7 @@ import { getUserContacts } from 'redux/slices/contacts/contactSlice';
 import { RootState } from 'redux/store';
 
 type Column = {
-	id: 'name' | 'role' | 'email';
+	id: 'id' | 'name' | 'role' | 'email';
 	label: string;
 	minWidth?: number;
 	align?: 'right';
@@ -24,6 +24,7 @@ type Column = {
 };
 
 type Data = {
+	id: string;
 	name: string;
 	role: string;
 	email: string;
@@ -45,19 +46,26 @@ export const Contacts = () => {
 	}, [dispatch, accessToken]);
 
 	const columns: Column[] = [
+		{ id: 'id', label: 'ID', minWidth: 25 },
 		{ id: 'name', label: 'Name', minWidth: 170 },
 		{ id: 'role', label: 'Role', minWidth: 100 },
 		{ id: 'email', label: 'Email', minWidth: 150 },
 	];
 
-	function createData(name: string, role: string, email: string): Data {
-		return { name, role, email };
+	function createData(
+		id: string,
+		name: string,
+		role: string,
+		email: string
+	): Data {
+		return { id, name, role, email };
 	}
 
 	const rows =
 		userContacts && userContacts.length > 0
 			? userContacts.map((contact: any) =>
 					createData(
+						contact.id,
 						`${contact.first_name} ${contact.last_name}`,
 						contact.role || '---',
 						contact.email || '---'
@@ -92,14 +100,18 @@ export const Contacts = () => {
 					message={t('pages.contacts.empty')}
 				/>
 			) : (
-				<Table columns={columns} rows={rows} />
+				<Table
+					columns={columns}
+					rows={rows}
+					navigationUrl="/dashboard/contacts"
+				/>
 			)}
 
 			<Modal
 				open={showContactModal}
 				onClose={handleCloseContactModal}
-				title="Add Contact"
-				content="Fill out the form below to create a new contact"
+				title={t('pages.contacts.addContact')}
+				content={t('pages.contacts.addContactDesc')}
 				onRequestClose={handleCloseContactModal}
 			>
 				<ContactForm

@@ -1,21 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
 	getContacts,
+	getContact,
 	createContact,
-	updateContactProfile,
+	updateContact,
+	deleteContact,
 } from 'services/api/contactAPI';
-
-function storeRefreshToken(token: string) {
-	localStorage.setItem('refreshToken', token);
-}
-
-function removeRefreshToken() {
-	localStorage.removeItem('refreshToken');
-}
-
-function getRefreshToken() {
-	return localStorage.getItem('refreshToken');
-}
 
 export interface Contact {
 	id?: string;
@@ -23,19 +13,14 @@ export interface Contact {
 	first_name?: string;
 	last_name?: string;
 	role?: string;
-	createdAt?: string;
+	created_at?: string;
 	token?: string | undefined;
 	user_id?: string | undefined;
 }
 
-export interface ContactUpdateData {
-	currentPassword: string;
-	token: string | undefined;
-	email?: string;
-	password?: string;
-	first_name?: string;
-	last_name?: string;
-	role?: string;
+export interface ContactFetchData {
+	id?: string | undefined;
+	token?: string | undefined;
 }
 
 interface AuthState {
@@ -59,7 +44,7 @@ const initialState: AuthState = {
 		last_name: undefined,
 		email: undefined,
 		role: undefined,
-		createdAt: undefined,
+		created_at: undefined,
 	},
 	loading: false,
 	error: false,
@@ -70,6 +55,19 @@ export const getUserContacts = createAsyncThunk(
 	'session/getUserContacts',
 	async (payload: string, { rejectWithValue }) => {
 		const response = await getContacts(payload);
+		if (response.errors) {
+			// The value we return becomes the `rejected` action payload
+			return rejectWithValue(response);
+		}
+		// The value we return becomes the `fulfilled` action payload
+		return response;
+	}
+);
+
+export const getUserContact = createAsyncThunk(
+	'session/getUserContact',
+	async (payload: ContactFetchData, { rejectWithValue }) => {
+		const response = await getContact(payload.id, payload.token);
 		if (response.errors) {
 			// The value we return becomes the `rejected` action payload
 			return rejectWithValue(response);
@@ -92,15 +90,23 @@ export const createUserContact = createAsyncThunk(
 	}
 );
 
-export const updateProfile = createAsyncThunk(
-	'session/updateProfile',
-	async (payload: ContactUpdateData, { rejectWithValue }) => {
-		const response = await updateContactProfile(
-			payload.currentPassword,
-			payload.token,
-			payload?.email,
-			payload?.password
-		);
+export const updateUserContact = createAsyncThunk(
+	'session/updateUserContact',
+	async (payload: Contact, { rejectWithValue }) => {
+		const response = await updateContact(payload, payload.token);
+		if (response.errors) {
+			// The value we return becomes the `rejected` action payload
+			return rejectWithValue(response);
+		}
+		// The value we return becomes the `fulfilled` action payload
+		return response;
+	}
+);
+
+export const deleteUserContact = createAsyncThunk(
+	'session/deleteUserContact',
+	async (payload: ContactFetchData, { rejectWithValue }) => {
+		const response = await deleteContact(payload.id, payload.token);
 		if (response.errors) {
 			// The value we return becomes the `rejected` action payload
 			return rejectWithValue(response);
@@ -141,6 +147,30 @@ export const contactSlice = createSlice({
 				state.error = true;
 				state.errorMessages = action.payload.errors;
 			})
+			.addCase(getUserContact.pending, (state) => {
+				state.loading = true;
+				state.error = false;
+				state.errorMessages = [];
+			})
+			.addCase(getUserContact.fulfilled, (state, action: any) => {
+				state.profile = {
+					id: action.payload.id,
+					first_name: action.payload.first_name,
+					last_name: action.payload.last_name,
+					email: action.payload.email,
+					role: action.payload.role,
+					created_at: action.payload.created_at,
+				};
+
+				state.loading = false;
+				state.error = false;
+				state.errorMessages = [];
+			})
+			.addCase(getUserContact.rejected, (state, action: any) => {
+				state.loading = false;
+				state.error = true;
+				state.errorMessages = action.payload.errors;
+			})
 			.addCase(createUserContact.pending, (state) => {
 				state.loading = true;
 				state.error = false;
@@ -168,26 +198,50 @@ export const contactSlice = createSlice({
 				state.error = true;
 				state.errorMessages = action.payload.errors;
 			})
-			.addCase(updateProfile.pending, (state) => {
+			.addCase(updateUserContact.pending, (state) => {
 				state.loading = true;
 				state.error = false;
 				state.errorMessages = [];
 			})
-			.addCase(updateProfile.fulfilled, (state, action: any) => {
+			.addCase(updateUserContact.fulfilled, (state, action: any) => {
 				state.profile = {
 					id: action.payload.id,
 					first_name: action.payload.first_name,
 					last_name: action.payload.last_name,
 					email: action.payload.email,
 					role: action.payload.role,
-					createdAt: action.payload.created_at,
+					created_at: action.payload.created_at,
 				};
 
 				state.loading = false;
 				state.error = false;
 				state.errorMessages = [];
 			})
-			.addCase(updateProfile.rejected, (state, action: any) => {
+			.addCase(updateUserContact.rejected, (state, action: any) => {
+				state.loading = false;
+				state.error = true;
+				state.errorMessages = action.payload.errors;
+			})
+			.addCase(deleteUserContact.pending, (state) => {
+				state.loading = true;
+				state.error = false;
+				state.errorMessages = [];
+			})
+			.addCase(deleteUserContact.fulfilled, (state, action: any) => {
+				const contacts = [...state.userContacts];
+				const indexOfContact = contacts.findIndex((contact) => {
+					return contact.id === action.payload.id;
+				});
+
+				contacts.splice(indexOfContact, 1);
+
+				state.userContacts = contacts;
+
+				state.loading = false;
+				state.error = false;
+				state.errorMessages = [];
+			})
+			.addCase(deleteUserContact.rejected, (state, action: any) => {
 				state.loading = false;
 				state.error = true;
 				state.errorMessages = action.payload.errors;

@@ -71,6 +71,7 @@ export const en = {
 			goPro: 'Upgrade to PRO for more users',
 			uploadAvatar: 'Upload Avatar',
 			dropHere: 'Drop Here',
+			cancel: 'Cancel',
 		},
 		navigation: {
 			pages: {
@@ -94,9 +95,22 @@ export const en = {
 			contacts: {
 				title: 'Contacts',
 				addContact: 'Add Contact',
+				addContactLoading: 'Adding...',
 				addContactDesc:
 					'Fill out the form below to create a new contact',
 				empty: "You currently have no contacts. Create a new contact using 'Add Button' above",
+			},
+			contactProfile: {
+				editContact: 'Edit Contact',
+				editContactLoading: 'Editing...',
+				editContactDesc: 'Fill out the form below to edit contact',
+				deleteContact: 'Delete Contact',
+				areYouSureDelete:
+					'Are you sure you want to delete this contact?',
+				delete: 'Delete',
+				overview: 'Overview',
+				role: 'Role',
+				email: 'Email',
 			},
 			account: {
 				title: 'My Account',

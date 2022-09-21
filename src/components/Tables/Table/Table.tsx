@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
 	Table as MUITable,
 	TableBody,
@@ -23,6 +24,7 @@ type TableProps = MUITableProps & {
 		[x: number]: string | number;
 		[x: symbol]: string | number;
 	}[];
+	navigationUrl?: string;
 };
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -64,36 +66,37 @@ function stableSort<T>(
 	return stabilizedThis.map((el) => el[0]);
 }
 
-export const Table = ({ columns, rows }: TableProps) => {
+export const Table = ({ columns, rows, navigationUrl = '' }: TableProps) => {
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
 	const [order, setOrder] = useState<Order>('asc');
 	const [orderBy, setOrderBy] = useState<keyof any>('');
+	const navigate = useNavigate();
 
-	const handleRequestSort = (
+	function handleRequestSort(
 		event: React.MouseEvent<unknown>,
 		property: keyof any
-	) => {
+	) {
 		const isAsc = orderBy === property && order === 'asc';
 		setOrder(isAsc ? 'desc' : 'asc');
 		setOrderBy(property);
-	};
+	}
 
 	const createSortHandler =
 		(property: keyof any) => (event: React.MouseEvent<unknown>) => {
 			handleRequestSort(event, property);
 		};
 
-	const handleChangePage = (event: unknown, newPage: number) => {
+	function handleChangePage(event: unknown, newPage: number) {
 		setPage(newPage);
-	};
+	}
 
-	const handleChangeRowsPerPage = (
+	function handleChangeRowsPerPage(
 		event: React.ChangeEvent<HTMLInputElement>
-	) => {
+	) {
 		setRowsPerPage(+event.target.value);
 		setPage(0);
-	};
+	}
 
 	return (
 		<S.Wrapper>
@@ -145,9 +148,18 @@ export const Table = ({ columns, rows }: TableProps) => {
 								return (
 									<TableRow
 										hover
+										className="table-row"
 										role="checkbox"
 										tabIndex={-1}
-										key={row.email}
+										key={row.id}
+										onClick={
+											navigationUrl
+												? () =>
+														navigate(
+															`${navigationUrl}/${row.id}`
+														)
+												: (e) => e.preventDefault()
+										}
 									>
 										{columns.map((column: any) => {
 											const value = row[column.id];

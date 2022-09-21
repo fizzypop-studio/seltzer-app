@@ -12,6 +12,7 @@ Main Pages
 *************/
 export { Account } from 'pages/main/Account';
 export { Contacts } from 'pages/main/Contacts';
+export { ContactProfile } from 'pages/main/ContactProfile';
 export { Dashboard } from 'pages/main/Dashboard';
 
 /*************
