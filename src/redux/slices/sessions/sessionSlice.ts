@@ -29,6 +29,7 @@ export interface User {
 	last_name?: string;
 	role?: string;
 	createdAt?: string;
+	token?: string;
 }
 
 export interface UserSignUpData {
@@ -41,13 +42,6 @@ export interface UserSignUpData {
 export interface UserLoginData {
 	email: string;
 	password: string;
-}
-
-export interface UserUpdateData {
-	currentPassword: string;
-	token: string | undefined;
-	email?: string;
-	password?: string;
 }
 
 export interface UserResetPasswordData {
@@ -107,13 +101,8 @@ export const signUpUser = createAsyncThunk(
 
 export const updateProfile = createAsyncThunk(
 	'session/updateProfile',
-	async (payload: UserUpdateData, { rejectWithValue }) => {
-		const response = await updateUserProfile(
-			payload.currentPassword,
-			payload.token,
-			payload?.email,
-			payload?.password
-		);
+	async (payload: User, { rejectWithValue }) => {
+		const response = await updateUserProfile(payload);
 		if (response.errors) {
 			// The value we return becomes the `rejected` action payload
 			return rejectWithValue(response);

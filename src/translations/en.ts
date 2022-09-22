@@ -27,6 +27,7 @@ export const en = {
 			},
 			role: {
 				label: 'Contact Role (ex. Sales)',
+				accountLabel: 'Account Role',
 				required: 'Role is required',
 			},
 			password: {
@@ -114,6 +115,12 @@ export const en = {
 			},
 			account: {
 				title: 'My Account',
+				edit: 'Edit Account',
+				editAccountDesc: 'Fill out the form below to edit your account',
+				editLoading: 'Editing...',
+				overview: 'Overview',
+				role: 'Role',
+				email: 'Email',
 			},
 		},
 	},

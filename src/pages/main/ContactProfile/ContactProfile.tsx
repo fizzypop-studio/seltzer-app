@@ -23,7 +23,7 @@ import { RootState } from 'redux/store';
 import * as S from './ContactProfile.styles';
 
 export const ContactProfile = () => {
-	const [showContactModal, setShowContactModal] = useState(false);
+	const [showContactModal, setShowContactModal] = useState<boolean>(false);
 	const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
 	const accessToken = useSelector(
 		(state: RootState) => state.session.accessToken

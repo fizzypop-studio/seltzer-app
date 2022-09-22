@@ -38,6 +38,7 @@ export { Stack } from './Layout/Stack';
 Inputs
 *************/
 export { AvatarUpload } from './Inputs/AvatarUpload';
+export { BasicSelect } from './Inputs/BasicSelect';
 export { TextInput } from './Inputs/TextInput';
 
 /*************
@@ -71,6 +72,7 @@ export { Table } from './Tables/Table';
 /*************
 Forms
 *************/
+export { AccountForm } from './Forms/AccountForm';
 export { ContactForm } from './Forms/ContactForm';
 
 /*************

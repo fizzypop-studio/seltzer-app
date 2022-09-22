@@ -117,5 +117,9 @@
     "prettier-eslint": "^13.0.0",
     "prettier-eslint-cli": "^5.0.1",
     "webpack": "^5.71.0"
+  },
+  "engines": {
+    "node": "17.4.0",
+    "yarn": "1.22.18"
   }
 }

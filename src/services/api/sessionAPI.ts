@@ -11,6 +11,16 @@ const RESET_PASSWORD_URL = '/users/reset-password';
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
 
+export interface User {
+	id?: string;
+	email?: string;
+	first_name?: string;
+	last_name?: string;
+	role?: string;
+	createdAt?: string;
+	token?: string;
+}
+
 export async function createUserWithEmailAndPassword(
 	firstName: string,
 	lastName: string,
@@ -57,22 +67,15 @@ export async function loginWithEmailAndPassword(
 		});
 }
 
-export async function updateUserProfile(
-	currentPassword: string,
-	token: string | undefined,
-	email?: string,
-	password?: string
-) {
+export async function updateUserProfile(userData: User) {
 	const data = {
-		current_password: currentPassword,
-		email,
-		password,
+		...userData,
 		client_id: CLIENT_ID,
 		client_secret: CLIENT_SECRET,
 	};
 	const config = {
 		headers: {
-			Authorization: `Bearer ${token}`,
+			Authorization: `Bearer ${userData.token}`,
 		},
 	};
 
