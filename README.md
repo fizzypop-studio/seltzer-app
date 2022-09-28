@@ -16,7 +16,19 @@ yarn install
 ```
 # Getting Started
 
-To get started simply run:
+## Add .env file
+
+Create a `.env` file in the root of your project and add the values below to it.
+
+```shell
+REACT_APP_BACKEND_URL="http://localhost:3001/api/v1"
+REACT_APP_CLIENT_ID=[YOUR_CLIENT_ID_FROM_API]
+REACT_APP_CLIENT_SECRET=[YOUR_CLIENT_SECRET_FROM_API]
+```
+
+Get the values for `REACT_APP_CLIENT_ID` & `REACT_APP_CLIENT_SECRET` from intructions in [Seltzer API README](https://github.com/fizzypop-studio/seltzer-api)
+
+To start the client simply run:
 
 ```shell
 yarn start
