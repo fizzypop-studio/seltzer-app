@@ -155,7 +155,6 @@ export const sendResetPasswordEmail = createAsyncThunk(
 	'session/sendResetPasswordEmail',
 	async (payload: string, { rejectWithValue }) => {
 		const response = await sendResetUserPasswordEmail(payload);
-		console.log({ response });
 		// if response has errors rejectwithvalue
 		if (response.error) {
 			// The value we return becomes the `rejected` action payload
@@ -174,7 +173,6 @@ export const resetPassword = createAsyncThunk(
 			payload.password_confirmation,
 			payload.reset_password_token
 		);
-		console.log({ response });
 		// if response has errors rejectwithvalue
 		if (response.error) {
 			// The value we return becomes the `rejected` action payload

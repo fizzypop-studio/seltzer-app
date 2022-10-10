@@ -82,7 +82,6 @@ export const SignUp = () => {
 			password: data.password,
 		};
 		const response = await dispatch(signUpUser(payload));
-		console.log({ response });
 		if (errorMessages.length === 0) {
 			navigate('/dashboard');
 		} else {

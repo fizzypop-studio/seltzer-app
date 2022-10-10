@@ -170,7 +170,7 @@ export const Drawer = ({ children, currentRoute }: DrawerProps) => {
 					{t('navigation.pages.notifications')}
 				</Typography>
 			</MenuItem>
-			<MenuItem onClick={handleProfileMenuOpen}>
+			<MenuItem onClick={() => navigate('/dashboard/account')}>
 				<IconButton
 					icon={<AccountCircle />}
 					size="large"
@@ -181,6 +181,70 @@ export const Drawer = ({ children, currentRoute }: DrawerProps) => {
 				</Typography>
 			</MenuItem>
 		</Menu>
+	);
+
+	const drawer = (
+		<>
+			<S.DrawerHeader>
+				<IconButton
+					icon={
+						theme.direction === 'rtl' ? (
+							<ChevronRight />
+						) : (
+							<ChevronLeft />
+						)
+					}
+					onClick={handleDrawerClose}
+				/>
+			</S.DrawerHeader>
+			<List>
+				{drawerRoutes.map((item) => (
+					<ListItem
+						key={item.label}
+						disablePadding
+						sx={{ display: 'block' }}
+						className={`${
+							currentRoute === item.to ? 'active-item' : ''
+						} `}
+					>
+						<ListItemButton
+							sx={{
+								minHeight: 48,
+								justifyContent: drawerOpen
+									? 'initial'
+									: 'center',
+								px: 2.5,
+							}}
+							onClick={() => navigate(item.to)}
+						>
+							<ListItemIcon
+								sx={{
+									minWidth: 0,
+									mr: drawerOpen ? 3 : 'auto',
+									justifyContent: 'center',
+								}}
+							>
+								{item.icon}
+							</ListItemIcon>
+							<ListItemText
+								primary={item.label}
+								sx={{ opacity: drawerOpen ? 1 : 0 }}
+							/>
+						</ListItemButton>
+					</ListItem>
+				))}
+			</List>
+			{drawerOpen && !isMobile && (
+				<S.DrawerFooter>
+					<IconActionCard
+						content={t('general.goPro')}
+						icon={<ElectricBolt />}
+						buttonText={t('general.upgrade')}
+						onClick={handleUpgrade}
+					/>
+				</S.DrawerFooter>
+			)}
+		</>
 	);
 
 	return (
@@ -249,69 +313,12 @@ export const Drawer = ({ children, currentRoute }: DrawerProps) => {
 			<S.NavigationDrawer
 				ModalProps={{
 					keepMounted: isMobile,
+					open: drawerOpen,
 				}}
 				variant={isMobile ? 'temporary' : 'permanent'}
 				open={drawerOpen}
 			>
-				<S.DrawerHeader>
-					<IconButton
-						icon={
-							theme.direction === 'rtl' ? (
-								<ChevronRight />
-							) : (
-								<ChevronLeft />
-							)
-						}
-						onClick={handleDrawerClose}
-					/>
-				</S.DrawerHeader>
-				<List>
-					{drawerRoutes.map((item) => (
-						<ListItem
-							key={item.label}
-							disablePadding
-							sx={{ display: 'block' }}
-							className={`${
-								currentRoute === item.to ? 'active-item' : ''
-							} `}
-						>
-							<ListItemButton
-								sx={{
-									minHeight: 48,
-									justifyContent: drawerOpen
-										? 'initial'
-										: 'center',
-									px: 2.5,
-								}}
-								onClick={() => navigate(item.to)}
-							>
-								<ListItemIcon
-									sx={{
-										minWidth: 0,
-										mr: drawerOpen ? 3 : 'auto',
-										justifyContent: 'center',
-									}}
-								>
-									{item.icon}
-								</ListItemIcon>
-								<ListItemText
-									primary={item.label}
-									sx={{ opacity: drawerOpen ? 1 : 0 }}
-								/>
-							</ListItemButton>
-						</ListItem>
-					))}
-				</List>
-				{drawerOpen && (
-					<S.DrawerFooter>
-						<IconActionCard
-							content={t('general.goPro')}
-							icon={<ElectricBolt />}
-							buttonText={t('general.upgrade')}
-							onClick={handleUpgrade}
-						/>
-					</S.DrawerFooter>
-				)}
+				{drawer}
 			</S.NavigationDrawer>
 			<Box
 				component="main"
@@ -321,8 +328,7 @@ export const Drawer = ({ children, currentRoute }: DrawerProps) => {
 				<S.DrawerHeader />
 				{children}
 			</Box>
-			{renderMobileMenu}
-			{renderMenu}
+			{isMobile ? renderMobileMenu : renderMenu}
 			<ActionModal
 				open={logoutModalOpen}
 				onClose={handleCloseLogoutModal}

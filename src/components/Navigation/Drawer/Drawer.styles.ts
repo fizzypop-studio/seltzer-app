@@ -38,15 +38,13 @@ const closedMixin = (theme: Theme): CSSObject => ({
 	},
 });
 
-export const Wrapper = styled(Box)`
-	padding: 0;
-
-	.active-item {
-		border-right: 0.3rem solid
-			${({ theme }) => theme.palette.secondary.light};
-		background-color: ${({ theme }) => theme.palette.background.default};
-	}
-`;
+export const Wrapper = styled(Box)(({ theme }) => ({
+	padding: 0,
+	'.active-item': {
+		borderRight: `0.3rem solid ${theme.palette.secondary.light}`,
+		backgroundColor: theme.palette.background.default,
+	},
+}));
 
 export const DrawerHeader = styled('div')(({ theme }) => ({
 	display: 'flex',
@@ -89,6 +87,10 @@ export const NavigationDrawer = styled(MuiDrawer, {
 	...(open && {
 		...openedMixin(theme),
 		'& .MuiDrawer-paper': openedMixin(theme),
+		'& .MuiPaper-root': {
+			visibility: 'inherit !important',
+			transform: 'none !important',
+		},
 	}),
 	...(!open && {
 		...closedMixin(theme),
